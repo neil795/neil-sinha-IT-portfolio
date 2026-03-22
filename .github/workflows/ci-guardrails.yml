@@ -39,8 +39,8 @@ jobs:
 
             const area = areaLabels[0];
             const allowlistByArea = {
-              "area:infra": [".github/", "docs/", "frameworks/", "templates/", "case-studies/", "content/", "src/", "public/", ".gitignore", "README.md", "CONTRIBUTING.md"],
-              "area:frontend": ["src/", "content/", "public/", "docs/", "templates/"],
+              "area:infra": [".github/", "docs/", "frameworks/", "templates/", "case-studies/", "content/", "src/", "web/", "public/", ".gitignore", "README.md", "CONTRIBUTING.md"],
+              "area:frontend": ["src/", "web/", "content/", "public/", "docs/", "templates/"],
               "area:backend": ["docs/", "frameworks/", "templates/"],
               "area:db": ["docs/", "templates/"],
               "area:sre": [".github/", "docs/", "frameworks/", "templates/"],
