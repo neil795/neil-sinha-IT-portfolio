@@ -1,0 +1,34 @@
+name: SRE Monitoring Baseline
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  uptime-and-budget-check:
+    runs-on: ubuntu-latest
+    env:
+      SITE_URL: ${{ vars.PORTFOLIO_SITE_URL || 'https://neil-sinha-it-portfolio.pages.dev' }}
+      SLO_TARGET: '99.5'
+      ERROR_BUDGET_MINUTES_PER_30D: '216'
+    steps:
+      - name: Uptime probe
+        run: |
+          echo "Checking $SITE_URL"
+          status=$(curl -s -o /dev/null -w "%{http_code}" "$SITE_URL")
+          if [ "$status" -lt 200 ] || [ "$status" -ge 400 ]; then
+            echo "Uptime check failed with status $status"
+            exit 1
+          fi
+          echo "Uptime check passed with status $status"
+
+      - name: Emit baseline policy summary
+        run: |
+          echo "SLO target: ${SLO_TARGET}% availability"
+          echo "Error budget (30d): ${ERROR_BUDGET_MINUTES_PER_30D} minutes"
+          echo "Escalation map: docs/sre/escalation-map.md"
+          echo "Incident runbook: docs/sre/incident-runbook.md"
