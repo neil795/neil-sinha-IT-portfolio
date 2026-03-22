@@ -8,32 +8,43 @@ const caseStudies = (await getCollection('case-studies')).sort((a, b) => a.data.
 const experience = (await getCollection('experience')).sort((a, b) => a.data.order - b.data.order);
 const aiGovernance = (await getCollection('ai-governance')).sort((a, b) => a.data.order - b.data.order);
 
+const parseNumericToken = (value: string) => {
+  const match = value.match(/-?\d+(?:\.\d+)?/);
+  if (!match) return null;
+  const full = match[0];
+  const num = Number(full);
+  const index = value.indexOf(full);
+  const prefix = value.slice(0, index);
+  const suffix = value.slice(index + full.length);
+  return { num, prefix, suffix };
+};
+
 const meta = metaEntry?.data;
 ---
 
 <Layout>
   <SiteNav />
   <main id="main-content" class="page">
-    <section id="hero" class="section hero" aria-labelledby="hero-title">
+    <section id="hero" class="section hero" aria-labelledby="hero-title" data-section>
       <p class="eyebrow">Neil Sinha · Platform + AI Engineering</p>
       <h1 id="hero-title">{meta?.heroTitle}</h1>
       <p class="subtitle">{meta?.heroSubtitle}</p>
       <div class="proof-pills" aria-label="Outcome highlights">
-        <span>83% faster build cycles</span>
-        <span>−40% CI build failures</span>
-        <span>RTO 8h → 4h</span>
+        <span data-reveal>83% faster build cycles</span>
+        <span data-reveal>−40% CI build failures</span>
+        <span data-reveal>RTO 8h → 4h</span>
       </div>
     </section>
 
-    <section id="problem-landscape" class="section section-inverse reveal" aria-labelledby="problem-title" data-section>
+    <section id="problem-landscape" class="section section-inverse" aria-labelledby="problem-title" data-section data-reveal>
       <h2 id="problem-title">Problem Landscape</h2>
-      <div class="problem-grid">
+      <div class="problem-grid" data-reveal-stagger>
         <article>
-          <p class="stat">32%</p>
+          <p class="stat"><span data-count-up data-count-from="0" data-count-to="32">32</span>%</p>
           <p>Cloud spend routinely wasted without active controls.</p>
         </article>
         <article>
-          <p class="stat">1 in 5</p>
+          <p class="stat"><span data-count-up data-count-from="0" data-count-to="1">1</span> in 5</p>
           <p>Deployments fail in teams lacking CI reliability discipline.</p>
         </article>
         <article>
@@ -43,9 +54,9 @@ const meta = metaEntry?.data;
       </div>
     </section>
 
-    <section id="operating-philosophy" class="section reveal" aria-labelledby="philosophy-title" data-section>
+    <section id="operating-philosophy" class="section" aria-labelledby="philosophy-title" data-section data-reveal>
       <h2 id="philosophy-title">Operating Philosophy</h2>
-      <div class="philosophy-grid">
+      <div class="philosophy-grid" data-reveal-stagger>
         <article class="flat-block"><h3>Cost Discipline</h3><p>Engineer systems so spend stays forecastable and tied to outcomes.</p></article>
         <article class="flat-block"><h3>Reliability First</h3><p>Prioritize repeatability and recovery over brittle delivery speed.</p></article>
         <article class="flat-block"><h3>Observability</h3><p>Surface health and latency signals early so failures are predictable.</p></article>
@@ -53,20 +64,31 @@ const meta = metaEntry?.data;
       </div>
     </section>
 
-    <section id="case-studies" class="section reveal" aria-labelledby="case-studies-title" data-section>
+    <section id="case-studies" class="section" aria-labelledby="case-studies-title" data-section data-reveal>
       <h2 id="case-studies-title">Case Studies</h2>
-      <div class="case-list">
+      <div class="case-list" data-reveal-stagger>
         {caseStudies.map((entry) => (
           <article class="case-card">
             <p class="case-context">{entry.data.companyContext}</p>
             <h3>{entry.data.title}</h3>
             <div class="metric-row">
-              {entry.data.impact.slice(0, 3).map((metric) => (
-                <div class="metric-block" aria-label={`${metric.label} changed from ${metric.before} to ${metric.after}`}>
-                  <p class="metric-value">{metric.before} → {metric.after}</p>
-                  <p class="metric-label">{metric.label}</p>
-                </div>
-              ))}
+              {entry.data.impact.slice(0, 3).map((metric) => {
+                const parsed = parseNumericToken(metric.after);
+                return (
+                  <div class="metric-block" aria-label={`${metric.label} changed from ${metric.before} to ${metric.after}`}>
+                    <p class="metric-value">
+                      {metric.before} → {parsed ? (
+                        <>
+                          {parsed.prefix}
+                          <span data-count-up data-count-from={parsed.num < 0 ? 0 : Math.max(0, Math.floor(parsed.num * 2))} data-count-to={parsed.num}>{parsed.num}</span>
+                          {parsed.suffix}
+                        </>
+                      ) : metric.after}
+                    </p>
+                    <p class="metric-label">{metric.label}</p>
+                  </div>
+                );
+              })}
             </div>
             <p><strong>Problem:</strong> {entry.data.problem}</p>
             <p><strong>Intervention:</strong> {entry.data.intervention}</p>
@@ -76,9 +98,9 @@ const meta = metaEntry?.data;
       </div>
     </section>
 
-    <section id="ai-governance" class="section reveal" aria-labelledby="governance-title" data-section>
+    <section id="ai-governance" class="section" aria-labelledby="governance-title" data-section data-reveal>
       <h2 id="governance-title">AI Governance in Practice</h2>
-      <div class="governance-grid">
+      <div class="governance-grid" data-reveal-stagger>
         {aiGovernance.map((entry) => (
           <article class="governance-card">
             <h3>{entry.data.title}</h3>
@@ -91,9 +113,9 @@ const meta = metaEntry?.data;
       </div>
     </section>
 
-    <section id="experience" class="section reveal" aria-labelledby="experience-title" data-section>
+    <section id="experience" class="section" aria-labelledby="experience-title" data-section data-reveal>
       <h2 id="experience-title">Experience</h2>
-      <div class="timeline">
+      <div class="timeline" data-reveal-stagger>
         {experience.map((entry) => (
           <article class="timeline-item">
             <div class="timeline-meta">
@@ -112,7 +134,7 @@ const meta = metaEntry?.data;
       </div>
     </section>
 
-    <section id="web-foundry" class="section reveal" aria-labelledby="web-foundry-title" data-section>
+    <section id="web-foundry" class="section" aria-labelledby="web-foundry-title" data-section data-reveal>
       <h2 id="web-foundry-title">Web Foundry</h2>
       <article class="elevated-block">
         <p>Operator-led consulting across platform modernization, cost governance, and release reliability for delivery-focused teams.</p>
@@ -120,12 +142,12 @@ const meta = metaEntry?.data;
       </article>
     </section>
 
-    <section id="trust" class="section reveal" aria-labelledby="trust-title" data-section>
+    <section id="trust" class="section" aria-labelledby="trust-title" data-section data-reveal>
       <h2 id="trust-title">Trust Layer</h2>
       <p class="subtitle">Delivery experience spans ANZ, Humanforce, mPrest, and Monash-led engineering environments with measurable operational outcomes.</p>
     </section>
 
-    <section id="contact" class="section section-inverse cta reveal" aria-labelledby="contact-title" data-section>
+    <section id="contact" class="section section-inverse cta" aria-labelledby="contact-title" data-section data-reveal>
       <h2 id="contact-title">{meta?.ctaPrimary}</h2>
       <p>{meta?.ctaConsulting}</p>
       <div class="cta-actions" role="group" aria-label="Contact actions">
@@ -137,11 +159,16 @@ const meta = metaEntry?.data;
 </Layout>
 
 <script>
-  const sections = [...document.querySelectorAll<HTMLElement>('section[data-section]')];
-  const navLinks = [...document.querySelectorAll<HTMLAnchorElement>('[data-navlink]')];
-  const progress = document.querySelector<HTMLElement>('[data-scroll-progress]');
+  // @ts-nocheck
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const sections = [...document.querySelectorAll('section[data-section]')];
+  const navLinks = [...document.querySelectorAll('[data-navlink]')];
+  const progress = document.querySelector('[data-scroll-progress]');
+  const revealEls = [...document.querySelectorAll('[data-reveal]')];
+  const staggerGroups = [...document.querySelectorAll('[data-reveal-stagger]')];
+  const counters = [...document.querySelectorAll('[data-count-up]')];
 
-  const setActive = (id: string) => {
+  const setActive = (id) => {
     navLinks.forEach((link) => {
       const active = link.getAttribute('href') === `#${id}`;
       if (active) link.setAttribute('aria-current', 'true');
@@ -149,15 +176,50 @@ const meta = metaEntry?.data;
     });
   };
 
+  const animateCounter = (el) => {
+    if (prefersReduced || el.dataset.animated === 'true') return;
+    const from = Number(el.dataset.countFrom ?? 0);
+    const to = Number(el.dataset.countTo ?? 0);
+    const duration = 1100;
+    const start = performance.now();
+    const step = (now) => {
+      const t = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - t, 4);
+      const value = Math.round(from + (to - from) * eased);
+      el.textContent = `${value}`;
+      if (t < 1) requestAnimationFrame(step);
+      else el.dataset.animated = 'true';
+    };
+    requestAnimationFrame(step);
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.setAttribute('data-visible', 'true');
+      if (entry.target.matches('[data-count-up]')) animateCounter(entry.target);
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.15 });
+
+  revealEls.forEach((el) => observer.observe(el));
+  counters.forEach((el) => observer.observe(el));
+  staggerGroups.forEach((group) => {
+    [...group.children].forEach((child) => {
+      child.setAttribute('data-reveal', '');
+      observer.observe(child);
+    });
+  });
+
   if (sections.length > 0) {
-    const observer = new IntersectionObserver((entries) => {
+    const navObserver = new IntersectionObserver((entries) => {
       const visible = entries
         .filter((e) => e.isIntersecting)
         .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
       if (visible?.target?.id) setActive(visible.target.id);
-    }, { threshold: [0.25, 0.5, 0.75] });
+    }, { threshold: [0.2, 0.5, 0.75] });
 
-    sections.forEach((section) => observer.observe(section));
+    sections.forEach((section) => navObserver.observe(section));
   }
 
   const updateProgress = () => {
@@ -181,6 +243,22 @@ const meta = metaEntry?.data;
   h3 { font-size: var(--text-card-title); margin: 0 0 var(--space-sm); }
   .subtitle { color: var(--text-secondary); max-width: 70ch; line-height: var(--leading-normal); }
 
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity var(--duration-slow) var(--ease-out), transform var(--duration-slow) var(--ease-out);
+  }
+  [data-reveal][data-visible='true'] {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  [data-reveal-stagger] > *:nth-child(1) { transition-delay: 0ms; }
+  [data-reveal-stagger] > *:nth-child(2) { transition-delay: 80ms; }
+  [data-reveal-stagger] > *:nth-child(3) { transition-delay: 160ms; }
+  [data-reveal-stagger] > *:nth-child(4) { transition-delay: 240ms; }
+  [data-reveal-stagger] > *:nth-child(5) { transition-delay: 320ms; }
+
   .proof-pills, .tag-row { display: flex; gap: var(--space-sm); flex-wrap: wrap; margin-top: var(--space-md); }
   .proof-pills span, .tag-row span { font-size: var(--text-small); padding: .4rem .65rem; border-radius: var(--radius-md); background: var(--bg-elevated); border: 1px solid var(--border-default); }
 
@@ -189,18 +267,19 @@ const meta = metaEntry?.data;
 
   .problem-grid { display: grid; gap: var(--space-md); grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); }
   .problem-grid article { background: color-mix(in oklab, var(--bg-inverse-surface) 88%, black 12%); border: 1px solid rgba(255,255,255,.08); border-radius: var(--radius-md); padding: var(--space-md); }
-  .stat { font-size: 2rem; font-weight: 700; margin: 0 0 .25rem; color: #93c5fd; }
+  .stat { font-size: 2rem; font-weight: 700; margin: 0 0 .25rem; color: #93c5fd; font-variant-numeric: tabular-nums; }
 
   .philosophy-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: var(--space-lg); }
   .flat-block { padding: 0; }
   .flat-block p { color: var(--text-secondary); line-height: var(--leading-normal); }
 
   .case-list { display: grid; gap: var(--space-lg); }
-  .case-card { background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: var(--radius-lg); padding: var(--space-lg); box-shadow: var(--shadow-md); }
+  .case-card { background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: var(--radius-lg); padding: var(--space-lg); box-shadow: var(--shadow-md); transition: transform var(--duration-normal) var(--ease-out), box-shadow var(--duration-normal) var(--ease-out); }
+  .case-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
   .case-context { margin: 0 0 .35rem; font-size: var(--text-xs); color: var(--text-muted); text-transform: uppercase; letter-spacing: .06em; }
   .metric-row { display: grid; gap: var(--space-sm); grid-template-columns: repeat(auto-fit,minmax(190px,1fr)); margin: var(--space-md) 0; }
   .metric-block { background: var(--bg-elevated); border: 1px solid var(--border-default); border-radius: var(--radius-md); padding: .6rem .75rem; }
-  .metric-value { margin: 0; font-size: 1.35rem; line-height: 1.2; color: var(--accent); font-weight: 700; }
+  .metric-value { margin: 0; font-size: 1.35rem; line-height: 1.2; color: var(--accent); font-weight: 700; font-variant-numeric: tabular-nums; }
   .metric-label { margin: .2rem 0 0; font-size: var(--text-xs); color: var(--text-muted); }
 
   .governance-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: var(--space-md); }
@@ -222,5 +301,11 @@ const meta = metaEntry?.data;
 
   @media (max-width: 860px) {
     .timeline-item { grid-template-columns: 1fr; gap: var(--space-sm); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-reveal] { opacity: 1; transform: none; transition: none; }
+    .case-card { transition: none; }
+    .case-card:hover { transform: none; box-shadow: var(--shadow-md); }
   }
 </style>
