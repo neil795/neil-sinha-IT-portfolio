@@ -46,6 +46,7 @@ This repository distills battle-tested patterns from real-world execution into p
 - Rollback playbook: `docs/release/rollback-playbook.md`
 - Validation evidence: `docs/release/validation-evidence.md`
 - Local container runbook: `docs/deploy/local-container.md`
+- Container build pipeline: `docs/deploy/container-pipeline.md`
 
 ## License
 
