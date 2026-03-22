@@ -42,7 +42,7 @@ const meta = metaEntry?.data;
       </div>
     </section>
 
-    <section id="problem-landscape" class="section section-inverse" aria-labelledby="problem-title" data-section data-reveal>
+    <section id="problem-landscape" class="section" aria-labelledby="problem-title" data-section data-reveal>
       <h2 id="problem-title">Problem Landscape</h2>
       <div class="problem-grid" data-reveal-stagger>
         <article>
@@ -109,14 +109,19 @@ const meta = metaEntry?.data;
 
     <section id="ai-governance" class="section" aria-labelledby="governance-title" data-section data-reveal>
       <h2 id="governance-title">AI Governance in Practice</h2>
-      <div class="governance-grid" data-reveal-stagger>
+      <div class="compact-grid" data-reveal-stagger>
         {aiGovernance.map((entry) => (
-          <article class="governance-card">
+          <article class="dense-card">
             <h3>{entry.data.title}</h3>
-            <p><strong>Failure mode:</strong> {entry.data.failureMode}</p>
-            <p><strong>Blast radius:</strong> {entry.data.blastRadius}</p>
-            <p><strong>Guardrail:</strong> {entry.data.guardrailAdded}</p>
-            <p><strong>Risk reduction:</strong> {entry.data.riskReduction}</p>
+            <p class="dense-kicker"><strong>Risk reduction:</strong> {entry.data.riskReduction}</p>
+            <details>
+              <summary>View controls</summary>
+              <ul>
+                <li><strong>Failure mode:</strong> {entry.data.failureMode}</li>
+                <li><strong>Blast radius:</strong> {entry.data.blastRadius}</li>
+                <li><strong>Guardrail:</strong> {entry.data.guardrailAdded}</li>
+              </ul>
+            </details>
           </article>
         ))}
       </div>
@@ -124,20 +129,23 @@ const meta = metaEntry?.data;
 
     <section id="experience" class="section" aria-labelledby="experience-title" data-section data-reveal>
       <h2 id="experience-title">Experience</h2>
-      <div class="timeline" data-reveal-stagger>
+      <div class="compact-grid" data-reveal-stagger>
         {experience.map((entry) => (
-          <article class="timeline-item">
-            <div class="timeline-meta">
-              <p class="muted">{entry.data.period}</p>
-              <p>{entry.data.company}</p>
-            </div>
-            <div class="timeline-content">
-              <h3>{entry.data.title}</h3>
-              <p>{entry.data.summary}</p>
-              <ul>
-                {entry.data.highlights.map((h) => <li>{h}</li>)}
-              </ul>
-            </div>
+          <article class="dense-card">
+            <p class="muted">{entry.data.period} · {entry.data.company}</p>
+            <h3>{entry.data.title}</h3>
+            <p>{entry.data.summary}</p>
+            <ul>
+              {entry.data.highlights.slice(0, 2).map((h) => <li>{h}</li>)}
+            </ul>
+            {entry.data.highlights.length > 2 && (
+              <details>
+                <summary>More outcomes</summary>
+                <ul>
+                  {entry.data.highlights.slice(2).map((h) => <li>{h}</li>)}
+                </ul>
+              </details>
+            )}
           </article>
         ))}
       </div>
@@ -153,7 +161,7 @@ const meta = metaEntry?.data;
 
     <section id="trust" class="section" aria-labelledby="trust-title" data-section data-reveal>
       <h2 id="trust-title">Trust Layer</h2>
-      <p class="subtitle">Delivery experience spans ANZ, Humanforce, mPrest, and Monash-led engineering environments with measurable operational outcomes.</p>
+      <p class="subtitle">Trusted across enterprise, scale-up, and research environments with measured delivery outcomes.</p>
       <div class="logo-strip" aria-label="Organizations and institutions">
         <span>ANZ</span>
         <span>Humanforce</span>
@@ -281,8 +289,8 @@ const meta = metaEntry?.data;
   .section-inverse h2, .section-inverse p { color: var(--text-inverse); }
 
   .problem-grid { display: grid; gap: var(--space-md); grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); }
-  .problem-grid article { background: color-mix(in oklab, var(--bg-inverse-surface) 88%, black 12%); border: 1px solid rgba(255,255,255,.08); border-radius: var(--radius-md); padding: var(--space-md); }
-  .stat { font-size: 2rem; font-weight: 700; margin: 0 0 .25rem; color: #93c5fd; font-variant-numeric: tabular-nums; }
+  .problem-grid article { background: var(--bg-elevated); border: 1px solid var(--border-default); border-radius: var(--radius-md); padding: var(--space-md); }
+  .stat { font-size: 2rem; font-weight: 700; margin: 0 0 .25rem; color: var(--accent); font-variant-numeric: tabular-nums; }
 
   .philosophy-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: var(--space-lg); }
   .flat-block { padding: 0; }
@@ -298,15 +306,13 @@ const meta = metaEntry?.data;
   .metric-label { margin: .2rem 0 0; font-size: var(--text-xs); color: var(--text-muted); }
   .case-visual { width: 100%; border: 1px solid var(--border-default); border-radius: var(--radius-md); background: var(--bg-primary); margin: .25rem 0 var(--space-md); }
 
-  .governance-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: var(--space-md); }
-  .governance-card { background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: var(--radius-md); padding: var(--space-md); }
-  .governance-card p { color: var(--text-secondary); line-height: var(--leading-normal); }
-
-  .timeline { border-left: 2px solid var(--border-default); margin-left: .35rem; padding-left: var(--space-lg); display: grid; gap: var(--space-lg); }
-  .timeline-item { display: grid; grid-template-columns: 220px 1fr; gap: var(--space-lg); }
-  .timeline-meta p { margin: 0; }
-  .timeline-meta .muted { color: var(--text-muted); font-size: var(--text-small); margin-bottom: .35rem; }
-  .timeline-content p, .timeline-content li { color: var(--text-secondary); line-height: var(--leading-normal); }
+  .compact-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: var(--space-md); }
+  .dense-card { background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: var(--radius-md); padding: var(--space-md); }
+  .dense-card p, .dense-card li { color: var(--text-secondary); line-height: var(--leading-normal); }
+  .dense-card ul { margin: .5rem 0 0; padding-left: 1rem; }
+  .dense-card details { margin-top: .5rem; }
+  .dense-card summary { cursor: pointer; color: var(--accent); font-weight: 600; }
+  .dense-kicker { margin: .2rem 0 .4rem; }
 
   .elevated-block { background: var(--bg-elevated); border: 1px solid var(--border-default); border-radius: var(--radius-md); padding: var(--space-lg); }
 
@@ -325,10 +331,6 @@ const meta = metaEntry?.data;
   .cta-actions { display: flex; gap: var(--space-sm); flex-wrap: wrap; margin-top: var(--space-md); }
   .btn { display: inline-flex; align-items: center; justify-content: center; border-radius: var(--radius-md); padding: .6rem .95rem; font-weight: 600; text-decoration: none; background: var(--bg-surface); color: var(--text-primary); border: 1px solid transparent; }
   .btn:hover { background: var(--accent-subtle); border-color: color-mix(in oklab, var(--accent) 35%, transparent); }
-
-  @media (max-width: 860px) {
-    .timeline-item { grid-template-columns: 1fr; gap: var(--space-sm); }
-  }
 
   @media (prefers-reduced-motion: reduce) {
     [data-reveal] { opacity: 1; transform: none; transition: none; }
