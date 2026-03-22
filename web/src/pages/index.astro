@@ -14,52 +14,73 @@ const meta = metaEntry?.data;
 <Layout>
   <SiteNav />
   <main id="main-content" class="page">
-    <section id="hero" class="section hero reveal" aria-labelledby="hero-title">
+    <section id="hero" class="section hero" aria-labelledby="hero-title">
       <p class="eyebrow">Neil Sinha · Platform + AI Engineering</p>
       <h1 id="hero-title">{meta?.heroTitle}</h1>
       <p class="subtitle">{meta?.heroSubtitle}</p>
-    </section>
-
-    <section id="problem-landscape" class="section reveal d2" aria-labelledby="problem-title">
-      <h2 id="problem-title">Problem Landscape</h2>
-      <p class="subtitle">Cloud cost drift, CI instability, and AI governance gaps are recurring delivery risks. This portfolio focuses on measured interventions that reduce those risks.</p>
-    </section>
-
-    <section id="operating-philosophy" class="section reveal d2">
-      <h2>Operating Philosophy</h2>
-      <div class="grid">
-        <article class="card"><h3>Cost Discipline</h3><p>Engineer systems so spend stays forecastable and aligned to business value.</p></article>
-        <article class="card"><h3>Reliability First</h3><p>Prefer repeatable release patterns and fast recovery over brittle speed.</p></article>
-        <article class="card"><h3>Observability</h3><p>Expose health, latency, and integrity signals early so issues surface before incidents.</p></article>
-        <article class="card"><h3>Safe AI Adoption</h3><p>Use governance checks and auditable workflows so acceleration does not bypass control.</p></article>
+      <div class="proof-pills" aria-label="Outcome highlights">
+        <span>83% faster build cycles</span>
+        <span>−40% CI build failures</span>
+        <span>RTO 8h → 4h</span>
       </div>
     </section>
 
-    <section id="case-studies" class="section reveal d3">
-      <h2>Case Studies</h2>
-      <div class="grid">
+    <section id="problem-landscape" class="section section-inverse" aria-labelledby="problem-title">
+      <h2 id="problem-title">Problem Landscape</h2>
+      <div class="problem-grid">
+        <article>
+          <p class="stat">32%</p>
+          <p>Cloud spend routinely wasted without active controls.</p>
+        </article>
+        <article>
+          <p class="stat">1 in 5</p>
+          <p>Deployments fail in teams lacking CI reliability discipline.</p>
+        </article>
+        <article>
+          <p class="stat">High</p>
+          <p>AI-assisted delivery risk rises when governance is ad hoc.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="operating-philosophy" class="section" aria-labelledby="philosophy-title">
+      <h2 id="philosophy-title">Operating Philosophy</h2>
+      <div class="philosophy-grid">
+        <article class="flat-block"><h3>Cost Discipline</h3><p>Engineer systems so spend stays forecastable and tied to outcomes.</p></article>
+        <article class="flat-block"><h3>Reliability First</h3><p>Prioritize repeatability and recovery over brittle delivery speed.</p></article>
+        <article class="flat-block"><h3>Observability</h3><p>Surface health and latency signals early so failures are predictable.</p></article>
+        <article class="flat-block"><h3>Safe AI Adoption</h3><p>Acceleration only counts when controls and auditability stay intact.</p></article>
+      </div>
+    </section>
+
+    <section id="case-studies" class="section" aria-labelledby="case-studies-title">
+      <h2 id="case-studies-title">Case Studies</h2>
+      <div class="case-list">
         {caseStudies.map((entry) => (
-          <article class="card">
+          <article class="case-card">
+            <p class="case-context">{entry.data.companyContext}</p>
             <h3>{entry.data.title}</h3>
-            <p><strong>Context:</strong> {entry.data.companyContext}</p>
+            <div class="metric-row">
+              {entry.data.impact.slice(0, 3).map((metric) => (
+                <div class="metric-block" aria-label={`${metric.label} changed from ${metric.before} to ${metric.after}`}>
+                  <p class="metric-value">{metric.before} → {metric.after}</p>
+                  <p class="metric-label">{metric.label}</p>
+                </div>
+              ))}
+            </div>
             <p><strong>Problem:</strong> {entry.data.problem}</p>
             <p><strong>Intervention:</strong> {entry.data.intervention}</p>
             <p><strong>Tradeoff:</strong> {entry.data.tradeoffs}</p>
-            <ul>
-              {entry.data.impact.map((metric) => (
-                <li>{metric.label}: {metric.before} → {metric.after} ({metric.timeframe}, {metric.confidence})</li>
-              ))}
-            </ul>
           </article>
         ))}
       </div>
     </section>
 
-    <section id="ai-governance" class="section reveal d3">
-      <h2>AI Governance in Practice</h2>
-      <div class="grid">
+    <section id="ai-governance" class="section" aria-labelledby="governance-title">
+      <h2 id="governance-title">AI Governance in Practice</h2>
+      <div class="governance-grid">
         {aiGovernance.map((entry) => (
-          <article class="card">
+          <article class="governance-card">
             <h3>{entry.data.title}</h3>
             <p><strong>Failure mode:</strong> {entry.data.failureMode}</p>
             <p><strong>Blast radius:</strong> {entry.data.blastRadius}</p>
@@ -70,133 +91,100 @@ const meta = metaEntry?.data;
       </div>
     </section>
 
-    <section id="experience" class="section">
-      <h2>Experience</h2>
-      <div class="grid">
+    <section id="experience" class="section" aria-labelledby="experience-title">
+      <h2 id="experience-title">Experience</h2>
+      <div class="timeline">
         {experience.map((entry) => (
-          <article class="card">
-            <h3>{entry.data.title} — {entry.data.company}</h3>
-            <p class="muted">{entry.data.period}</p>
-            <p>{entry.data.summary}</p>
-            <ul>
-              {entry.data.highlights.map((h) => <li>{h}</li>)}
-            </ul>
+          <article class="timeline-item">
+            <div class="timeline-meta">
+              <p class="muted">{entry.data.period}</p>
+              <p>{entry.data.company}</p>
+            </div>
+            <div class="timeline-content">
+              <h3>{entry.data.title}</h3>
+              <p>{entry.data.summary}</p>
+              <ul>
+                {entry.data.highlights.map((h) => <li>{h}</li>)}
+              </ul>
+            </div>
           </article>
         ))}
       </div>
     </section>
 
-    <section id="web-foundry" class="section">
-      <h2>Web Foundry</h2>
-      <p class="subtitle">Operator-led consulting focused on platform modernization, delivery reliability, and AI governance implementation.</p>
+    <section id="web-foundry" class="section" aria-labelledby="web-foundry-title">
+      <h2 id="web-foundry-title">Web Foundry</h2>
+      <article class="elevated-block">
+        <p>Operator-led consulting across platform modernization, cost governance, and release reliability for delivery-focused teams.</p>
+        <div class="tag-row"><span>Cloud Cost Control</span><span>CI/CD Reliability</span><span>AI Governance Controls</span></div>
+      </article>
     </section>
 
-    <section id="trust" class="section">
-      <h2>Trust Layer</h2>
-      <p class="subtitle">Leadership history includes ANZ, Humanforce, and contract delivery in regulated environments.</p>
+    <section id="trust" class="section" aria-labelledby="trust-title">
+      <h2 id="trust-title">Trust Layer</h2>
+      <p class="subtitle">Delivery experience spans ANZ, Humanforce, mPrest, and Monash-led engineering environments with measurable operational outcomes.</p>
     </section>
 
-    <section id="contact" class="section cta" aria-labelledby="contact-title">
+    <section id="contact" class="section section-inverse cta" aria-labelledby="contact-title">
       <h2 id="contact-title">{meta?.ctaPrimary}</h2>
-      <p>{meta?.ctaRecruiter}</p>
-      <p>{meta?.ctaFounder}</p>
       <p>{meta?.ctaConsulting}</p>
       <div class="cta-actions" role="group" aria-label="Contact actions">
         <a class="btn" href="mailto:hello@webfoundry.au">Email</a>
-        <a class="btn btn-secondary" href="https://www.linkedin.com/in/neil-sinha-ai-engineer/" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a class="btn" href="https://www.linkedin.com/in/neil-sinha-ai-engineer/" target="_blank" rel="noreferrer">LinkedIn</a>
       </div>
     </section>
   </main>
 </Layout>
 
 <style>
-  .page {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: var(--space-xl) 1.25rem var(--space-3xl);
-    color: var(--text-primary);
+  .page { max-width: 1100px; margin: 0 auto; padding: var(--space-xl) 1.25rem var(--space-3xl); }
+  .section { margin: 0 0 var(--space-section); scroll-margin-top: 96px; }
+  .eyebrow { font-size: var(--text-small); text-transform: uppercase; letter-spacing: .08em; color: var(--text-muted); }
+  h1 { font-size: var(--text-hero); line-height: var(--leading-tight); max-width: 16ch; margin: var(--space-xs) 0 var(--space-md); }
+  h2 { font-size: var(--text-section); margin-bottom: var(--space-lg); }
+  h3 { font-size: var(--text-card-title); margin: 0 0 var(--space-sm); }
+  .subtitle { color: var(--text-secondary); max-width: 70ch; line-height: var(--leading-normal); }
+
+  .proof-pills, .tag-row { display: flex; gap: var(--space-sm); flex-wrap: wrap; margin-top: var(--space-md); }
+  .proof-pills span, .tag-row span { font-size: var(--text-small); padding: .4rem .65rem; border-radius: var(--radius-md); background: var(--bg-elevated); border: 1px solid var(--border-default); }
+
+  .section-inverse { background: var(--bg-inverse); color: var(--text-inverse); border-radius: var(--radius-lg); padding: var(--space-xl); }
+  .section-inverse h2, .section-inverse p { color: var(--text-inverse); }
+
+  .problem-grid { display: grid; gap: var(--space-md); grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); }
+  .problem-grid article { background: color-mix(in oklab, var(--bg-inverse-surface) 88%, black 12%); border: 1px solid rgba(255,255,255,.08); border-radius: var(--radius-md); padding: var(--space-md); }
+  .stat { font-size: 2rem; font-weight: 700; margin: 0 0 .25rem; color: #93c5fd; }
+
+  .philosophy-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: var(--space-lg); }
+  .flat-block { padding: 0; }
+  .flat-block p { color: var(--text-secondary); line-height: var(--leading-normal); }
+
+  .case-list { display: grid; gap: var(--space-lg); }
+  .case-card { background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: var(--radius-lg); padding: var(--space-lg); box-shadow: var(--shadow-md); }
+  .case-context { margin: 0 0 .35rem; font-size: var(--text-xs); color: var(--text-muted); text-transform: uppercase; letter-spacing: .06em; }
+  .metric-row { display: grid; gap: var(--space-sm); grid-template-columns: repeat(auto-fit,minmax(190px,1fr)); margin: var(--space-md) 0; }
+  .metric-block { background: var(--bg-elevated); border: 1px solid var(--border-default); border-radius: var(--radius-md); padding: .6rem .75rem; }
+  .metric-value { margin: 0; font-size: 1.35rem; line-height: 1.2; color: var(--accent); font-weight: 700; }
+  .metric-label { margin: .2rem 0 0; font-size: var(--text-xs); color: var(--text-muted); }
+
+  .governance-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: var(--space-md); }
+  .governance-card { background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: var(--radius-md); padding: var(--space-md); }
+  .governance-card p { color: var(--text-secondary); line-height: var(--leading-normal); }
+
+  .timeline { border-left: 2px solid var(--border-default); margin-left: .35rem; padding-left: var(--space-lg); display: grid; gap: var(--space-lg); }
+  .timeline-item { display: grid; grid-template-columns: 220px 1fr; gap: var(--space-lg); }
+  .timeline-meta p { margin: 0; }
+  .timeline-meta .muted { color: var(--text-muted); font-size: var(--text-small); margin-bottom: .35rem; }
+  .timeline-content p, .timeline-content li { color: var(--text-secondary); line-height: var(--leading-normal); }
+
+  .elevated-block { background: var(--bg-elevated); border: 1px solid var(--border-default); border-radius: var(--radius-md); padding: var(--space-lg); }
+
+  .cta { margin-bottom: 0; }
+  .cta-actions { display: flex; gap: var(--space-sm); flex-wrap: wrap; margin-top: var(--space-md); }
+  .btn { display: inline-flex; align-items: center; justify-content: center; border-radius: var(--radius-md); padding: .6rem .95rem; font-weight: 600; text-decoration: none; background: var(--bg-surface); color: var(--text-primary); border: 1px solid transparent; }
+  .btn:hover { background: var(--accent-subtle); border-color: color-mix(in oklab, var(--accent) 35%, transparent); }
+
+  @media (max-width: 860px) {
+    .timeline-item { grid-template-columns: 1fr; gap: var(--space-sm); }
   }
-
-  .section {
-    margin: 0 0 var(--space-section);
-    scroll-margin-top: 96px;
-  }
-
-  .hero { padding-top: var(--space-lg); }
-
-  .eyebrow {
-    font-size: var(--text-small);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--text-muted);
-    margin-bottom: var(--space-sm);
-  }
-
-  h1 {
-    font-size: var(--text-hero);
-    line-height: var(--leading-tight);
-    margin: var(--space-xs) 0 var(--space-md);
-    max-width: 900px;
-  }
-
-  h2 {
-    font-size: var(--text-section);
-    line-height: 1.2;
-    margin-bottom: var(--space-md);
-  }
-
-  .subtitle {
-    font-size: var(--text-body);
-    color: var(--text-secondary);
-    max-width: 850px;
-    line-height: var(--leading-normal);
-  }
-
-  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-md); }
-
-  .card {
-    border: 1px solid var(--border-default);
-    border-radius: var(--radius-md);
-    padding: 1.1rem;
-    background: var(--bg-surface);
-    box-shadow: var(--shadow-md);
-    transition: transform var(--duration-normal) var(--ease-out), box-shadow var(--duration-normal) var(--ease-out);
-  }
-
-  .card:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
-  .card h3 { margin-top: 0; font-size: var(--text-card-title); }
-  .card p { color: var(--text-secondary); line-height: var(--leading-normal); }
-  .card strong { color: var(--text-primary); }
-  .card ul { margin: 0.65rem 0 0; padding-left: 1.1rem; }
-  .card li { margin: 0.35rem 0; color: var(--text-secondary); }
-
-  .muted { color: var(--text-muted); font-size: var(--text-small); }
-
-  .cta {
-    border-top: 1px solid var(--border-default);
-    padding-top: var(--space-xl);
-  }
-
-  .cta-actions { display: flex; gap: var(--space-sm); margin-top: var(--space-md); flex-wrap: wrap; }
-
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: var(--radius-md);
-    padding: 0.6rem 0.95rem;
-    font-weight: 600;
-    text-decoration: none;
-    background: var(--bg-inverse);
-    color: var(--text-inverse);
-    border: 1px solid var(--bg-inverse);
-  }
-  .btn:hover { background: var(--bg-inverse-surface); }
-
-  .btn-secondary {
-    background: var(--bg-surface);
-    color: var(--text-primary);
-    border-color: var(--border-strong);
-  }
-  .btn-secondary:hover { background: var(--bg-primary); }
 </style>
