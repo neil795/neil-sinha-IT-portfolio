@@ -36,6 +36,10 @@ This repository distills battle-tested patterns from real-world execution into p
 3. Wire CI checks from `.github/workflows/` examples.
 4. Require proof-bundle comments for issue-linked PRs.
 
+## Architecture decisions
+
+- ADR-001 (framework/deploy/motion): `docs/adr/001-framework-and-deployment.md`
+
 ## License
 
 MIT
