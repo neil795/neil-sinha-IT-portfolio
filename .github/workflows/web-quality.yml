@@ -1,0 +1,49 @@
+name: Web Quality Gates
+
+on:
+  pull_request:
+    paths:
+      - 'web/**'
+      - '.github/workflows/web-quality.yml'
+      - '.github/lighthouse/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lighthouse-and-a11y:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+
+      - name: Install web dependencies
+        run: npm ci
+        working-directory: web
+
+      - name: Build web
+        run: npm run build
+        working-directory: web
+
+      - name: Run Lighthouse CI (includes accessibility assertions)
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          configPath: .github/lighthouse/lighthouserc.json
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+
+      - name: Upload web dist artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-dist
+          path: web/dist
+          if-no-files-found: error
