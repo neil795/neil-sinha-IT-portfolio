@@ -15,11 +15,12 @@ const items = [
     <nav aria-label="Primary">
       <ul>
         {items.map((item) => (
-          <li><a href={item.href}>{item.label}</a></li>
+          <li><a href={item.href} data-navlink>{item.label}</a></li>
         ))}
       </ul>
     </nav>
   </div>
+  <div class="progress" aria-hidden="true"><span data-scroll-progress></span></div>
 </header>
 
 <style>
@@ -63,11 +64,26 @@ const items = [
   }
 
   a:hover,
-  a:focus-visible {
+  a:focus-visible,
+  a[aria-current='true'] {
     color: var(--text-primary);
     text-decoration: underline;
     text-decoration-color: color-mix(in oklab, var(--accent) 72%, transparent);
     text-underline-offset: 0.18em;
+  }
+
+  .progress {
+    height: 2px;
+    width: 100%;
+    background: transparent;
+  }
+
+  .progress > span {
+    display: block;
+    width: 0%;
+    height: 100%;
+    background: var(--accent);
+    transition: width var(--duration-fast) linear;
   }
 
   @media (max-width: 760px) {

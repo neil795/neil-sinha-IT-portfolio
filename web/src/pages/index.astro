@@ -25,7 +25,7 @@ const meta = metaEntry?.data;
       </div>
     </section>
 
-    <section id="problem-landscape" class="section section-inverse" aria-labelledby="problem-title">
+    <section id="problem-landscape" class="section section-inverse reveal" aria-labelledby="problem-title" data-section>
       <h2 id="problem-title">Problem Landscape</h2>
       <div class="problem-grid">
         <article>
@@ -43,7 +43,7 @@ const meta = metaEntry?.data;
       </div>
     </section>
 
-    <section id="operating-philosophy" class="section" aria-labelledby="philosophy-title">
+    <section id="operating-philosophy" class="section reveal" aria-labelledby="philosophy-title" data-section>
       <h2 id="philosophy-title">Operating Philosophy</h2>
       <div class="philosophy-grid">
         <article class="flat-block"><h3>Cost Discipline</h3><p>Engineer systems so spend stays forecastable and tied to outcomes.</p></article>
@@ -53,7 +53,7 @@ const meta = metaEntry?.data;
       </div>
     </section>
 
-    <section id="case-studies" class="section" aria-labelledby="case-studies-title">
+    <section id="case-studies" class="section reveal" aria-labelledby="case-studies-title" data-section>
       <h2 id="case-studies-title">Case Studies</h2>
       <div class="case-list">
         {caseStudies.map((entry) => (
@@ -76,7 +76,7 @@ const meta = metaEntry?.data;
       </div>
     </section>
 
-    <section id="ai-governance" class="section" aria-labelledby="governance-title">
+    <section id="ai-governance" class="section reveal" aria-labelledby="governance-title" data-section>
       <h2 id="governance-title">AI Governance in Practice</h2>
       <div class="governance-grid">
         {aiGovernance.map((entry) => (
@@ -91,7 +91,7 @@ const meta = metaEntry?.data;
       </div>
     </section>
 
-    <section id="experience" class="section" aria-labelledby="experience-title">
+    <section id="experience" class="section reveal" aria-labelledby="experience-title" data-section>
       <h2 id="experience-title">Experience</h2>
       <div class="timeline">
         {experience.map((entry) => (
@@ -112,7 +112,7 @@ const meta = metaEntry?.data;
       </div>
     </section>
 
-    <section id="web-foundry" class="section" aria-labelledby="web-foundry-title">
+    <section id="web-foundry" class="section reveal" aria-labelledby="web-foundry-title" data-section>
       <h2 id="web-foundry-title">Web Foundry</h2>
       <article class="elevated-block">
         <p>Operator-led consulting across platform modernization, cost governance, and release reliability for delivery-focused teams.</p>
@@ -120,12 +120,12 @@ const meta = metaEntry?.data;
       </article>
     </section>
 
-    <section id="trust" class="section" aria-labelledby="trust-title">
+    <section id="trust" class="section reveal" aria-labelledby="trust-title" data-section>
       <h2 id="trust-title">Trust Layer</h2>
       <p class="subtitle">Delivery experience spans ANZ, Humanforce, mPrest, and Monash-led engineering environments with measurable operational outcomes.</p>
     </section>
 
-    <section id="contact" class="section section-inverse cta" aria-labelledby="contact-title">
+    <section id="contact" class="section section-inverse cta reveal" aria-labelledby="contact-title" data-section>
       <h2 id="contact-title">{meta?.ctaPrimary}</h2>
       <p>{meta?.ctaConsulting}</p>
       <div class="cta-actions" role="group" aria-label="Contact actions">
@@ -135,6 +135,42 @@ const meta = metaEntry?.data;
     </section>
   </main>
 </Layout>
+
+<script>
+  const sections = [...document.querySelectorAll<HTMLElement>('section[data-section]')];
+  const navLinks = [...document.querySelectorAll<HTMLAnchorElement>('[data-navlink]')];
+  const progress = document.querySelector<HTMLElement>('[data-scroll-progress]');
+
+  const setActive = (id: string) => {
+    navLinks.forEach((link) => {
+      const active = link.getAttribute('href') === `#${id}`;
+      if (active) link.setAttribute('aria-current', 'true');
+      else link.removeAttribute('aria-current');
+    });
+  };
+
+  if (sections.length > 0) {
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries
+        .filter((e) => e.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (visible?.target?.id) setActive(visible.target.id);
+    }, { threshold: [0.25, 0.5, 0.75] });
+
+    sections.forEach((section) => observer.observe(section));
+  }
+
+  const updateProgress = () => {
+    if (!progress) return;
+    const scrollTop = window.scrollY;
+    const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = scrollHeight > 0 ? Math.min(100, Math.max(0, (scrollTop / scrollHeight) * 100)) : 0;
+    progress.style.width = `${pct}%`;
+  };
+
+  updateProgress();
+  window.addEventListener('scroll', updateProgress, { passive: true });
+</script>
 
 <style>
   .page { max-width: 1100px; margin: 0 auto; padding: var(--space-xl) 1.25rem var(--space-3xl); }
