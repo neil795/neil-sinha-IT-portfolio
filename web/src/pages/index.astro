@@ -19,6 +19,12 @@ const parseNumericToken = (value: string) => {
   return { num, prefix, suffix };
 };
 
+const caseVisualBySlug: Record<string, string> = {
+  'anz-platform-acceleration': '/assets/case-anz-flow.svg',
+  'humanforce-ci-reliability': '/assets/case-humanforce-flow.svg',
+  'chat-erp-governed-delivery': '/assets/case-chat-erp-governance.svg',
+};
+
 const meta = metaEntry?.data;
 ---
 
@@ -90,6 +96,9 @@ const meta = metaEntry?.data;
                 );
               })}
             </div>
+            {caseVisualBySlug[entry.data.slug] && (
+              <img class="case-visual" src={caseVisualBySlug[entry.data.slug]} alt={`Architecture summary for ${entry.data.title}`} loading="lazy" />
+            )}
             <p><strong>Problem:</strong> {entry.data.problem}</p>
             <p><strong>Intervention:</strong> {entry.data.intervention}</p>
             <p><strong>Tradeoff:</strong> {entry.data.tradeoffs}</p>
@@ -145,6 +154,12 @@ const meta = metaEntry?.data;
     <section id="trust" class="section" aria-labelledby="trust-title" data-section data-reveal>
       <h2 id="trust-title">Trust Layer</h2>
       <p class="subtitle">Delivery experience spans ANZ, Humanforce, mPrest, and Monash-led engineering environments with measurable operational outcomes.</p>
+      <div class="logo-strip" aria-label="Organizations and institutions">
+        <span>ANZ</span>
+        <span>Humanforce</span>
+        <span>mPrest</span>
+        <span>Monash</span>
+      </div>
     </section>
 
     <section id="contact" class="section section-inverse cta" aria-labelledby="contact-title" data-section data-reveal>
@@ -281,6 +296,7 @@ const meta = metaEntry?.data;
   .metric-block { background: var(--bg-elevated); border: 1px solid var(--border-default); border-radius: var(--radius-md); padding: .6rem .75rem; }
   .metric-value { margin: 0; font-size: 1.35rem; line-height: 1.2; color: var(--accent); font-weight: 700; font-variant-numeric: tabular-nums; }
   .metric-label { margin: .2rem 0 0; font-size: var(--text-xs); color: var(--text-muted); }
+  .case-visual { width: 100%; border: 1px solid var(--border-default); border-radius: var(--radius-md); background: var(--bg-primary); margin: .25rem 0 var(--space-md); }
 
   .governance-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: var(--space-md); }
   .governance-card { background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: var(--radius-md); padding: var(--space-md); }
@@ -293,6 +309,17 @@ const meta = metaEntry?.data;
   .timeline-content p, .timeline-content li { color: var(--text-secondary); line-height: var(--leading-normal); }
 
   .elevated-block { background: var(--bg-elevated); border: 1px solid var(--border-default); border-radius: var(--radius-md); padding: var(--space-lg); }
+
+  .logo-strip { display: flex; gap: var(--space-sm); flex-wrap: wrap; margin-top: var(--space-md); }
+  .logo-strip span {
+    padding: .4rem .65rem;
+    border: 1px solid var(--border-default);
+    border-radius: 999px;
+    font-size: var(--text-small);
+    color: var(--text-secondary);
+    background: var(--bg-surface);
+    letter-spacing: 0.02em;
+  }
 
   .cta { margin-bottom: 0; }
   .cta-actions { display: flex; gap: var(--space-sm); flex-wrap: wrap; margin-top: var(--space-md); }
