@@ -40,6 +40,11 @@ This repository distills battle-tested patterns from real-world execution into p
 
 - ADR-001 (framework/deploy/motion): `docs/adr/001-framework-and-deployment.md`
 
+## Release operations
+
+- Promotion checklist: `docs/release/promotion-checklist.md`
+- Rollback playbook: `docs/release/rollback-playbook.md`
+
 ## License
 
 MIT

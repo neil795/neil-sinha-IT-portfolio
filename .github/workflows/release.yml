@@ -1,0 +1,77 @@
+name: Release Pipeline
+
+on:
+  pull_request:
+    paths:
+      - 'web/**'
+      - '.github/workflows/release.yml'
+  workflow_dispatch:
+    inputs:
+      target:
+        description: 'Promotion target'
+        required: true
+        default: 'preview'
+        type: choice
+        options:
+          - preview
+          - production
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  build-artifact:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: npm ci
+        working-directory: web
+      - run: npm run build
+        working-directory: web
+      - name: Upload immutable web artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-dist-${{ github.sha }}
+          path: web/dist
+
+  preview-pr-comment:
+    if: github.event_name == 'pull_request'
+    needs: build-artifact
+    runs-on: ubuntu-latest
+    steps:
+      - name: Comment PR with preview evidence link
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const runUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            const body = [
+              'Preview artifact is ready.',
+              '',
+              `- Run: ${runUrl}`,
+              `- Artifact: web-dist-${context.sha}`,
+              '- Promotion model: build once, promote many'
+            ].join('\n');
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.pull_request.number,
+              body
+            });
+
+  promote-production:
+    if: github.event_name == 'workflow_dispatch' && inputs.target == 'production'
+    needs: build-artifact
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Production promotion metadata
+        run: |
+          echo "Promoting immutable artifact for SHA: $GITHUB_SHA"
+          echo "Artifact: web-dist-$GITHUB_SHA"
+          echo "Rollback reference: docs/release/rollback-playbook.md"
