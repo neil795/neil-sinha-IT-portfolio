@@ -20,3 +20,8 @@ This repo follows playbook-first delivery and proof-based completion.
 
 ## Quality rule
 Do not mark done without evidence.
+
+## Governance quick references
+- `docs/ci/governance-quickstart.md`
+- `docs/ci/governance-validation-plan.md`
+- `docs/ci/governance-validation-results.md`
