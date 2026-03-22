@@ -44,6 +44,7 @@ This repository distills battle-tested patterns from real-world execution into p
 
 - Promotion checklist: `docs/release/promotion-checklist.md`
 - Rollback playbook: `docs/release/rollback-playbook.md`
+- Validation evidence: `docs/release/validation-evidence.md`
 
 ## License
 
