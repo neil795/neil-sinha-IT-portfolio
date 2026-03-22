@@ -2,6 +2,11 @@
 
 Senior Platform / AI-ML Platform Engineer based in Melbourne, focused on cloud cost control, CI/CD reliability, and safe AI-enabled engineering.
 
+Profile synthesis source set:
+- `Neil_Sinha_Resume_AI_ML_Platform_Engineer.docx`
+- `Neil_Sinha_Resume_Senior_Platform_Engineer.docx`
+- LinkedIn public profile snapshot: <https://www.linkedin.com/in/aaditya-neil-sinha/>
+
 ## Positioning
 I design and operate systems that are **cheaper, safer, and more predictable** under production pressure.
 
@@ -16,3 +21,5 @@ I design and operate systems that are **cheaper, safer, and more predictable** u
 - CI/CD standardisation and release engineering
 - Observability and SLO implementation
 - AI governance and guardrail-first automation
+- Data/streaming systems (Spark, Kafka, Dataflow)
+- Cross-functional mentoring and platform enablement

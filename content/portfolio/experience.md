@@ -34,3 +34,21 @@
 **Jul 2020 - Feb 2021**
 
 - Taught postgraduate big-data topics (Apache Spark, Apache Kafka, streaming/batch analysis) and ML pipeline fundamentals.
+
+## Community & Leadership (from LinkedIn profile)
+
+### Vice President — The Eighth Bit, Monash
+**May 2019 - Present**
+- Supported society operations and leadership decision-making for student technology initiatives.
+
+### Peer Mentor — Faculty of IT, Monash University
+**Feb 2019 - Present (multiple terms)**
+- Helped new international students adapt to academic and technical workflows.
+
+### Head of Technical Operations — BVPISTE
+**May 2016 - May 2017**
+- Organized technical events/workshops across robotics, Arduino, and Raspberry Pi tracks.
+
+### Head of Department, Event Management — BVPISTE
+**Sep 2015 - Apr 2016**
+- Led event operations and delivery quality for student society programs.
