@@ -14,14 +14,14 @@ const meta = metaEntry?.data;
 <Layout>
   <SiteNav />
   <main id="main-content" class="page">
-    <section id="hero" class="section hero reveal">
+    <section id="hero" class="section hero reveal" aria-labelledby="hero-title">
       <p class="eyebrow">Neil Sinha · Platform + AI Engineering</p>
-      <h1>{meta?.heroTitle}</h1>
+      <h1 id="hero-title">{meta?.heroTitle}</h1>
       <p class="subtitle">{meta?.heroSubtitle}</p>
     </section>
 
-    <section id="problem-landscape" class="section reveal d2">
-      <h2>Problem Landscape</h2>
+    <section id="problem-landscape" class="section reveal d2" aria-labelledby="problem-title">
+      <h2 id="problem-title">Problem Landscape</h2>
       <p class="subtitle">Cloud cost drift, CI instability, and AI governance gaps are recurring delivery risks. This portfolio focuses on measured interventions that reduce those risks.</p>
     </section>
 
@@ -96,11 +96,15 @@ const meta = metaEntry?.data;
       <p class="subtitle">Leadership history includes ANZ, Humanforce, and contract delivery in regulated environments.</p>
     </section>
 
-    <section id="contact" class="section cta">
-      <h2>{meta?.ctaPrimary}</h2>
+    <section id="contact" class="section cta" aria-labelledby="contact-title">
+      <h2 id="contact-title">{meta?.ctaPrimary}</h2>
       <p>{meta?.ctaRecruiter}</p>
       <p>{meta?.ctaFounder}</p>
       <p>{meta?.ctaConsulting}</p>
+      <div class="cta-actions" role="group" aria-label="Contact actions">
+        <a class="btn" href="mailto:hello@webfoundry.au">Email</a>
+        <a class="btn btn-secondary" href="https://www.linkedin.com/in/neil-sinha-ai-engineer/" target="_blank" rel="noreferrer">LinkedIn</a>
+      </div>
     </section>
   </main>
 </Layout>
@@ -121,4 +125,9 @@ const meta = metaEntry?.data;
   .card li { margin: 0.35rem 0; }
   .muted { color: #64748b; font-size: 0.92rem; }
   .cta { border-top: 1px solid #e2e8f0; padding-top: 2rem; }
+  .cta-actions { display: flex; gap: 0.75rem; margin-top: 1rem; flex-wrap: wrap; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; border-radius: 10px; padding: 0.55rem 0.9rem; font-weight: 600; text-decoration: none; background: #0f172a; color: #fff; border: 1px solid #0f172a; }
+  .btn:hover { background: #1e293b; }
+  .btn-secondary { background: #fff; color: #0f172a; border-color: #cbd5e1; }
+  .btn-secondary:hover { background: #f8fafc; }
 </style>
