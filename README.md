@@ -19,6 +19,7 @@ This repository distills battle-tested patterns from real-world execution into p
 - `templates/` — PR/issue templates and workflow examples
 - `frameworks/` — governance and delivery frameworks
 - `case-studies/` — anonymized implementation examples
+- `content/portfolio/` — structured content seed (About, Experience, Projects, Web Foundry, AI governance, CTA)
 
 ## Core principles
 
