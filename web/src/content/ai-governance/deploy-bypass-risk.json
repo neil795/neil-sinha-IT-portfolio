@@ -1,0 +1,8 @@
+{
+  "title": "Deployment workflow bypass risk",
+  "failureMode": "Promotion attempt lacked complete governance metadata and evidence.",
+  "blastRadius": "Untraceable production deployments and uncertain rollback posture.",
+  "guardrailAdded": "Issue-link and proof-artifact checks with required PR evidence sections.",
+  "riskReduction": "Promotion blocked unless traceability and validation evidence are present.",
+  "order": 20
+}

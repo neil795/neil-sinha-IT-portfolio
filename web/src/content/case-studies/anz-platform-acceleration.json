@@ -1,0 +1,34 @@
+{
+  "title": "ANZ Platform Acceleration",
+  "slug": "anz-platform-acceleration",
+  "companyContext": "Banking platform engineering",
+  "problem": "Pipeline latency, manual validation, and avoidable production defects slowed delivery.",
+  "intervention": "Introduced context-aware build logic, shift-left API validation patterns, and Kafka test automation frameworks.",
+  "tradeoffs": "Increased upfront platform engineering effort to standardize patterns across squads before rollout.",
+  "impact": [
+    {
+      "label": "Monorepo build duration",
+      "before": "18 min",
+      "after": "3 min",
+      "timeframe": "within one program increment",
+      "confidence": "exact"
+    },
+    {
+      "label": "Production defects",
+      "before": "baseline",
+      "after": "-37%",
+      "timeframe": "post shift-left rollout",
+      "confidence": "exact"
+    },
+    {
+      "label": "Manual streaming validation",
+      "before": "baseline",
+      "after": "-60%",
+      "timeframe": "after Kafka test automation",
+      "confidence": "approx"
+    }
+  ],
+  "tech": ["Go", "Kafka", "GKE", "Cloud Run", "Dataflow", "Spanner", "Nobl9"],
+  "featured": true,
+  "order": 10
+}

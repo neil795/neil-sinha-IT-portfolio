@@ -1,0 +1,8 @@
+{
+  "title": "Financial invariant drift",
+  "failureMode": "Unsafe numeric handling in ledger posting paths could corrupt financial consistency.",
+  "blastRadius": "Reconciliation failures and accounting data integrity risk.",
+  "guardrailAdded": "Safe-integer minor-unit validation at API/domain layers and finance regression gates.",
+  "riskReduction": "Invalid postings rejected before persistence; regression caught in CI.",
+  "order": 30
+}

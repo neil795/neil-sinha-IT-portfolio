@@ -1,0 +1,11 @@
+{
+  "company": "Blitzm Systems",
+  "title": "Software Engineer (Full-Stack)",
+  "period": "Nov 2020 - Mar 2022",
+  "summary": "Built full-stack and integration services across healthcare, logistics, and government projects.",
+  "highlights": [
+    "Containerized Python services on AWS EKS with MSSQL integration.",
+    "Delivered gRPC/OpenAPI service interfaces for cross-project interoperability."
+  ],
+  "order": 40
+}

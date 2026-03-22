@@ -1,0 +1,12 @@
+{
+  "company": "Humanforce",
+  "title": "DevOps Engineer",
+  "period": "Mar 2022 - Sep 2023",
+  "summary": "Owned CI/CD and cloud infrastructure reliability for workforce SaaS.",
+  "highlights": [
+    "Migrated CI/CD to GitHub Actions reducing build failures by ~40%.",
+    "Reduced automated test runtime from 1 day to 1 hour.",
+    "Improved DR objective from RTO 8h to RTO 4h."
+  ],
+  "order": 30
+}

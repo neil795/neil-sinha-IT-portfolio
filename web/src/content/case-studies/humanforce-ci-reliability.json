@@ -1,0 +1,34 @@
+{
+  "title": "Humanforce CI Reliability Program",
+  "slug": "humanforce-ci-reliability",
+  "companyContext": "SaaS workforce platform",
+  "problem": "CI instability and long test cycles were delaying releases and increasing recovery risk.",
+  "intervention": "Migrated CI/CD to GitHub Actions, redesigned test infrastructure on ECS/Fargate, and hardened disaster recovery IaC.",
+  "tradeoffs": "Required migration planning across multiple teams before consolidating pipeline standards.",
+  "impact": [
+    {
+      "label": "Build failures",
+      "before": "baseline",
+      "after": "-40%",
+      "timeframe": "after CI migration",
+      "confidence": "approx"
+    },
+    {
+      "label": "Automated test runtime",
+      "before": "1 day",
+      "after": "1 hour",
+      "timeframe": "post ECS/Fargate redesign",
+      "confidence": "exact"
+    },
+    {
+      "label": "Disaster recovery objective",
+      "before": "RTO 8h",
+      "after": "RTO 4h",
+      "timeframe": "after Terraform refactor",
+      "confidence": "exact"
+    }
+  ],
+  "tech": ["GitHub Actions", "ECS", "Fargate", "Terraform", "PagerDuty", "Dynatrace"],
+  "featured": true,
+  "order": 20
+}

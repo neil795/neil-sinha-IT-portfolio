@@ -1,0 +1,12 @@
+{
+  "company": "mPrest via Web Foundry Pty Ltd",
+  "title": "Platform Engineer (Contract)",
+  "period": "Nov 2025 - Present",
+  "summary": "Deploying regulated energy platform modules on on-prem OpenShift with repeatable release pipelines.",
+  "highlights": [
+    "Designed recursive Helm chart packaging across 4 products.",
+    "Managed architecture and release decisions across multiple energy providers.",
+    "Handled multi-container + database workloads in constrained on-prem environments."
+  ],
+  "order": 10
+}

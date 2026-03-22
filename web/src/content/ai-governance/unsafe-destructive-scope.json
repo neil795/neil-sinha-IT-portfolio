@@ -1,0 +1,8 @@
+{
+  "title": "Unsafe destructive action scope",
+  "failureMode": "Automation attempted repository mutation with insufficient safety boundaries.",
+  "blastRadius": "Potential large-scale code deletion and production instability.",
+  "guardrailAdded": "Protected branch constraints, approval gates, and proof-bundle merge checks.",
+  "riskReduction": "Destructive paths blocked before protected-branch merge.",
+  "order": 10
+}

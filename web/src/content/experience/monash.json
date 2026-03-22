@@ -1,0 +1,11 @@
+{
+  "company": "Monash University",
+  "title": "Teaching Associate",
+  "period": "Jul 2020 - Feb 2021",
+  "summary": "Taught postgraduate big-data processing foundations.",
+  "highlights": [
+    "Delivered Apache Spark and Kafka curriculum with streaming/batch pipeline emphasis.",
+    "Covered ML pipeline fundamentals from ingestion through transformation."
+  ],
+  "order": 50
+}

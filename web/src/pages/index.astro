@@ -1,0 +1,96 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+
+const [metaEntry] = await getCollection('meta');
+const caseStudies = (await getCollection('case-studies')).sort((a, b) => a.data.order - b.data.order);
+const experience = (await getCollection('experience')).sort((a, b) => a.data.order - b.data.order);
+const aiGovernance = (await getCollection('ai-governance')).sort((a, b) => a.data.order - b.data.order);
+
+const meta = metaEntry?.data;
+---
+
+<Layout>
+  <main class="page">
+    <section id="hero" class="section hero">
+      <p class="eyebrow">Neil Sinha · Platform + AI Engineering</p>
+      <h1>{meta?.heroTitle}</h1>
+      <p class="subtitle">{meta?.heroSubtitle}</p>
+    </section>
+
+    <section id="case-studies" class="section">
+      <h2>Case Studies</h2>
+      <div class="grid">
+        {caseStudies.map((entry) => (
+          <article class="card">
+            <h3>{entry.data.title}</h3>
+            <p><strong>Context:</strong> {entry.data.companyContext}</p>
+            <p><strong>Problem:</strong> {entry.data.problem}</p>
+            <p><strong>Intervention:</strong> {entry.data.intervention}</p>
+            <p><strong>Tradeoff:</strong> {entry.data.tradeoffs}</p>
+            <ul>
+              {entry.data.impact.map((metric) => (
+                <li>{metric.label}: {metric.before} → {metric.after} ({metric.timeframe}, {metric.confidence})</li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section id="ai-governance" class="section">
+      <h2>AI Governance in Practice</h2>
+      <div class="grid">
+        {aiGovernance.map((entry) => (
+          <article class="card">
+            <h3>{entry.data.title}</h3>
+            <p><strong>Failure mode:</strong> {entry.data.failureMode}</p>
+            <p><strong>Blast radius:</strong> {entry.data.blastRadius}</p>
+            <p><strong>Guardrail:</strong> {entry.data.guardrailAdded}</p>
+            <p><strong>Risk reduction:</strong> {entry.data.riskReduction}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section id="experience" class="section">
+      <h2>Experience</h2>
+      <div class="grid">
+        {experience.map((entry) => (
+          <article class="card">
+            <h3>{entry.data.title} — {entry.data.company}</h3>
+            <p class="muted">{entry.data.period}</p>
+            <p>{entry.data.summary}</p>
+            <ul>
+              {entry.data.highlights.map((h) => <li>{h}</li>)}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section id="contact" class="section cta">
+      <h2>{meta?.ctaPrimary}</h2>
+      <p>{meta?.ctaRecruiter}</p>
+      <p>{meta?.ctaFounder}</p>
+      <p>{meta?.ctaConsulting}</p>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .page { max-width: 1100px; margin: 0 auto; padding: 3rem 1.25rem 5rem; font-family: Inter, system-ui, -apple-system, sans-serif; color: #0f172a; }
+  .section { margin: 0 0 4rem; }
+  .hero { padding-top: 1rem; }
+  .eyebrow { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; color: #475569; }
+  h1 { font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.1; margin: 0.5rem 0 1rem; }
+  h2 { font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: 1rem; }
+  .subtitle { font-size: 1.1rem; color: #334155; max-width: 800px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
+  .card { border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; background: #fff; box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03); }
+  .card h3 { margin-top: 0; font-size: 1.05rem; }
+  .card ul { margin: 0.65rem 0 0; padding-left: 1.1rem; }
+  .card li { margin: 0.35rem 0; }
+  .muted { color: #64748b; font-size: 0.92rem; }
+  .cta { border-top: 1px solid #e2e8f0; padding-top: 2rem; }
+</style>

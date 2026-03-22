@@ -1,0 +1,12 @@
+{
+  "company": "ANZ Bank",
+  "title": "DevOps Engineer",
+  "period": "Sep 2023 - Sep 2025",
+  "summary": "Led platform reliability and automation for cloud-native squads on GCP.",
+  "highlights": [
+    "Reduced build times from 18 minutes to 3 minutes (83% faster).",
+    "Reduced production bugs by 37% via shift-left validation patterns.",
+    "Built Kafka test automation reducing manual validation by ~60%."
+  ],
+  "order": 20
+}
