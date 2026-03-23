@@ -19,6 +19,9 @@ const items = [
         ))}
       </ul>
     </nav>
+    <button class="theme-toggle" type="button" aria-label="Toggle color theme" data-theme-toggle>
+      Theme
+    </button>
   </div>
   <div class="progress" aria-hidden="true"><span data-scroll-progress></span></div>
 </header>
@@ -53,6 +56,17 @@ const items = [
     text-decoration: none;
     letter-spacing: -0.01em;
   }
+
+  .theme-toggle {
+    border: 1px solid var(--border-default);
+    background: var(--bg-elevated);
+    color: var(--text-secondary);
+    border-radius: 999px;
+    padding: 0.35rem 0.75rem;
+    font-size: var(--text-small);
+    cursor: pointer;
+  }
+  .theme-toggle:hover { color: var(--text-primary); border-color: var(--border-strong); }
 
   ul { display: flex; gap: var(--space-lg); list-style: none; padding: 0; margin: 0; }
 

@@ -114,14 +114,11 @@ const meta = metaEntry?.data;
           <article class="dense-card">
             <h3>{entry.data.title}</h3>
             <p class="dense-kicker"><strong>Risk reduction:</strong> {entry.data.riskReduction}</p>
-            <details>
-              <summary>View controls</summary>
-              <ul>
-                <li><strong>Failure mode:</strong> {entry.data.failureMode}</li>
-                <li><strong>Blast radius:</strong> {entry.data.blastRadius}</li>
-                <li><strong>Guardrail:</strong> {entry.data.guardrailAdded}</li>
-              </ul>
-            </details>
+            <ul>
+              <li><strong>Failure mode:</strong> {entry.data.failureMode}</li>
+              <li class="secondary"><strong>Blast radius:</strong> {entry.data.blastRadius}</li>
+              <li class="secondary"><strong>Guardrail:</strong> {entry.data.guardrailAdded}</li>
+            </ul>
           </article>
         ))}
       </div>
@@ -136,16 +133,8 @@ const meta = metaEntry?.data;
             <h3>{entry.data.title}</h3>
             <p>{entry.data.summary}</p>
             <ul>
-              {entry.data.highlights.slice(0, 2).map((h) => <li>{h}</li>)}
+              {entry.data.highlights.map((h, idx) => <li class={idx > 1 ? 'secondary' : ''}>{h}</li>)}
             </ul>
-            {entry.data.highlights.length > 2 && (
-              <details>
-                <summary>More outcomes</summary>
-                <ul>
-                  {entry.data.highlights.slice(2).map((h) => <li>{h}</li>)}
-                </ul>
-              </details>
-            )}
           </article>
         ))}
       </div>
@@ -245,12 +234,27 @@ const meta = metaEntry?.data;
     sections.forEach((section) => navObserver.observe(section));
   }
 
+  const themeToggle = document.querySelector('[data-theme-toggle]');
+  const themeLabel = () => {
+    const current = document.documentElement.getAttribute('data-theme') || 'light';
+    if (themeToggle) themeToggle.textContent = current === 'dark' ? 'Dark' : 'Light';
+  };
+  themeLabel();
+  themeToggle?.addEventListener('click', () => {
+    const current = document.documentElement.getAttribute('data-theme') || 'light';
+    const next = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('portfolio-theme', next);
+    themeLabel();
+  });
+
   const updateProgress = () => {
     if (!progress) return;
     const scrollTop = window.scrollY;
     const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
     const pct = scrollHeight > 0 ? Math.min(100, Math.max(0, (scrollTop / scrollHeight) * 100)) : 0;
     progress.style.width = `${pct}%`;
+    document.documentElement.style.setProperty('--scroll-y', `${Math.min(8, scrollTop * 0.02)}px`);
   };
 
   updateProgress();
@@ -259,7 +263,17 @@ const meta = metaEntry?.data;
 
 <style>
   .page { max-width: 1100px; margin: 0 auto; padding: var(--space-xl) 1.25rem var(--space-3xl); }
-  .section { margin: 0 0 var(--space-section); scroll-margin-top: 96px; }
+  .section { margin: 0 0 var(--space-section); scroll-margin-top: 96px; position: relative; padding: var(--space-lg); border-radius: var(--radius-lg); }
+  .section:nth-of-type(even) { background: color-mix(in oklab, var(--bg-elevated) 72%, transparent); }
+  .section + .section::before {
+    content: '';
+    position: absolute;
+    left: 12%;
+    right: 12%;
+    top: calc(var(--space-section) * -0.5);
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--border-default), transparent);
+  }
   .eyebrow { font-size: var(--text-small); text-transform: uppercase; letter-spacing: .08em; color: var(--text-muted); }
   h1 { font-size: var(--text-hero); line-height: var(--leading-tight); max-width: 16ch; margin: var(--space-xs) 0 var(--space-md); }
   h2 { font-size: var(--text-section); margin-bottom: var(--space-lg); }
@@ -310,8 +324,7 @@ const meta = metaEntry?.data;
   .dense-card { background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: var(--radius-md); padding: var(--space-md); }
   .dense-card p, .dense-card li { color: var(--text-secondary); line-height: var(--leading-normal); }
   .dense-card ul { margin: .5rem 0 0; padding-left: 1rem; }
-  .dense-card details { margin-top: .5rem; }
-  .dense-card summary { cursor: pointer; color: var(--accent); font-weight: 600; }
+  .dense-card li.secondary { opacity: 0.68; font-size: 0.96em; }
   .dense-kicker { margin: .2rem 0 .4rem; }
 
   .elevated-block { background: var(--bg-elevated); border: 1px solid var(--border-default); border-radius: var(--radius-md); padding: var(--space-lg); }
