@@ -4,24 +4,21 @@ const items = [
   { href: '#ai-governance', label: 'AI Risk' },
   { href: '#experience', label: 'Experience' },
   { href: '#web-foundry', label: 'Web Foundry' },
-  { href: '#contact', label: 'Contact' },
+  { href: '#contact', label: 'Contact', cta: true },
 ];
 ---
 
-<a class="skip-link" href="#main-content">Skip to content</a>
+<a href="#main-content" class="skip-link">Skip to content</a>
 <header class="site-header" role="banner">
   <div class="container nav-wrap">
     <a class="brand" href="#hero">Neil Sinha</a>
     <nav aria-label="Primary">
       <ul>
         {items.map((item) => (
-          <li><a href={item.href} data-navlink>{item.label}</a></li>
+          <li><a href={item.href} data-navlink class={item.cta ? 'is-cta' : ''}>{item.label}</a></li>
         ))}
       </ul>
     </nav>
-    <button class="theme-toggle" type="button" aria-label="Toggle color theme" data-theme-toggle>
-      Theme
-    </button>
   </div>
   <div class="progress" aria-hidden="true"><span data-scroll-progress></span></div>
 </header>
@@ -31,9 +28,9 @@ const items = [
     position: absolute;
     left: -9999px;
     top: 0;
-    background: var(--bg-inverse);
-    color: var(--text-inverse);
-    padding: var(--space-xs) var(--space-sm);
+    background: var(--accent);
+    color: var(--text-primary);
+    padding: var(--space-sm) var(--space-md);
     z-index: 100;
   }
   .skip-link:focus { left: 0.75rem; top: 0.75rem; }
@@ -42,56 +39,55 @@ const items = [
     position: sticky;
     top: 0;
     z-index: 50;
-    backdrop-filter: blur(8px);
-    background: color-mix(in oklab, var(--bg-surface) 90%, var(--bg-elevated) 10%);
-    border-bottom: 1px solid var(--border-default);
+    height: var(--nav-height);
+    backdrop-filter: blur(12px);
+    background: rgba(11, 15, 26, 0.85);
+    border-bottom: 1px solid var(--border-subtle);
   }
 
-  .container { max-width: 1100px; margin: 0 auto; padding: 0 1.25rem; }
-  .nav-wrap { min-height: 66px; display: flex; align-items: center; justify-content: space-between; gap: var(--space-lg); }
+  .container { max-width: var(--content-wide-max-width); margin: 0 auto; padding: 0 1.25rem; }
+  .nav-wrap { min-height: calc(var(--nav-height) - 2px); display: flex; align-items: center; justify-content: space-between; gap: var(--space-lg); }
 
   .brand {
+    font-family: var(--font-heading);
     font-weight: 700;
     color: var(--text-primary);
     text-decoration: none;
-    letter-spacing: -0.01em;
   }
 
-  .theme-toggle {
-    border: 1px solid var(--border-default);
-    background: var(--bg-elevated);
-    color: var(--text-secondary);
-    border-radius: 999px;
-    padding: 0.35rem 0.75rem;
-    font-size: var(--text-small);
-    cursor: pointer;
-  }
-  .theme-toggle:hover { color: var(--text-primary); border-color: var(--border-strong); }
-
-  ul { display: flex; gap: var(--space-lg); list-style: none; padding: 0; margin: 0; }
+  ul { display: flex; gap: var(--space-lg); list-style: none; padding: 0; margin: 0; align-items: center; }
 
   a {
     color: var(--text-secondary);
     text-decoration: none;
     font-size: var(--text-small);
-    line-height: var(--leading-normal);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    border-bottom: 2px solid transparent;
+    padding-bottom: 4px;
+    transition: all var(--duration-normal) var(--ease-out);
   }
 
   a:hover,
   a:focus-visible,
   a[aria-current='true'] {
     color: var(--text-primary);
-    text-decoration: underline;
-    text-decoration-color: color-mix(in oklab, var(--accent) 72%, transparent);
-    text-underline-offset: 0.18em;
+    border-bottom-color: var(--accent);
   }
 
-  .progress {
-    height: 2px;
-    width: 100%;
-    background: transparent;
+  a.is-cta {
+    border: 1px solid var(--border-medium);
+    border-radius: var(--radius-sm);
+    padding: var(--space-xs) var(--space-md);
+  }
+  a.is-cta:hover,
+  a.is-cta:focus-visible,
+  a.is-cta[aria-current='true'] {
+    border-color: var(--border-accent);
+    background: var(--accent-glow);
   }
 
+  .progress { height: 2px; width: 100%; background: transparent; }
   .progress > span {
     display: block;
     width: 0%;
@@ -101,6 +97,7 @@ const items = [
   }
 
   @media (max-width: 760px) {
+    .site-header { height: auto; }
     .nav-wrap { flex-direction: column; align-items: flex-start; padding: 0.75rem 1.25rem; }
     ul { flex-wrap: wrap; gap: 0.75rem; }
   }

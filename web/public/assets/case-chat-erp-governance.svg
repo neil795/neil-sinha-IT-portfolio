@@ -1,15 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="720" height="180" viewBox="0 0 720 180" fill="none">
-  <rect width="720" height="180" rx="12" fill="#F8FAFC"/>
-  <rect x="28" y="40" width="144" height="42" rx="8" fill="#FEE2E2"/>
-  <text x="40" y="66" fill="#7F1D1D" font-family="Inter, Arial" font-size="14">Ad hoc PR flow</text>
-  <rect x="220" y="40" width="144" height="42" rx="8" fill="#FEF3C7"/>
-  <text x="236" y="66" fill="#92400E" font-family="Inter, Arial" font-size="14">Issue-first gates</text>
-  <rect x="412" y="40" width="144" height="42" rx="8" fill="#DBEAFE"/>
-  <text x="426" y="66" fill="#1E3A8A" font-family="Inter, Arial" font-size="14">Proof bundle CI</text>
-  <rect x="584" y="40" width="108" height="42" rx="8" fill="#DCFCE7"/>
-  <text x="598" y="66" fill="#166534" font-family="Inter, Arial" font-size="14">Safe merge</text>
-  <path d="M180 61h28" stroke="#64748B" stroke-width="2" stroke-linecap="round"/>
-  <path d="M372 61h28" stroke="#64748B" stroke-width="2" stroke-linecap="round"/>
-  <path d="M564 61h14" stroke="#64748B" stroke-width="2" stroke-linecap="round"/>
-  <text x="28" y="128" fill="#475569" font-family="Inter, Arial" font-size="13">Governance becomes enforceable: issue link, scope checks, proof comment, and CI evidence required.</text>
+  <rect width="720" height="180" rx="12" fill="#0F172A"/>
+  <rect x="28" y="40" width="144" height="42" rx="8" fill="rgba(248,113,113,0.1)" stroke="rgba(248,113,113,0.3)"/>
+  <text x="40" y="66" fill="#F87171" font-family="Inter, Arial" font-size="14">Ad hoc PR flow</text>
+  <rect x="220" y="40" width="144" height="42" rx="8" fill="rgba(59,130,246,0.15)" stroke="rgba(96,165,250,0.3)"/>
+  <text x="236" y="66" fill="#60A5FA" font-family="Inter, Arial" font-size="14">Issue-first gates</text>
+  <rect x="412" y="40" width="144" height="42" rx="8" fill="rgba(59,130,246,0.15)" stroke="rgba(96,165,250,0.3)"/>
+  <text x="426" y="66" fill="#60A5FA" font-family="Inter, Arial" font-size="14">Proof bundle CI</text>
+  <rect x="584" y="40" width="108" height="42" rx="8" fill="rgba(52,211,153,0.1)" stroke="rgba(52,211,153,0.3)"/>
+  <text x="598" y="66" fill="#34D399" font-family="Inter, Arial" font-size="14">Safe merge</text>
+  <path d="M180 61h28" stroke="rgba(148,163,184,0.2)" stroke-width="2" stroke-linecap="round"/>
+  <path d="M372 61h28" stroke="rgba(148,163,184,0.2)" stroke-width="2" stroke-linecap="round"/>
+  <path d="M564 61h14" stroke="rgba(148,163,184,0.2)" stroke-width="2" stroke-linecap="round"/>
+  <text x="28" y="128" fill="#94A3B8" font-family="Inter, Arial" font-size="13">Governance becomes enforceable: issue link, scope checks, proof comment, and CI evidence required.</text>
 </svg>
