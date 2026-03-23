@@ -234,7 +234,8 @@ const meta = metaEntry?.data;
   .section-surface { background: var(--bg-surface); }
   .section-deep { background: var(--bg-deep); }
 
-  .headline-section { max-width: 680px; margin: 0 auto; padding: 5rem 2rem 3rem; }
+  .headline-section { max-width: none; margin: 0; padding: 5rem 0 3rem; }
+  .headline-section .container-wide { max-width: none; margin: 0; padding: 0 1.25rem; }
   .eyebrow { font-family: var(--font-body); font-size: var(--text-label); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1rem; }
   h1 { font-family: var(--font-heading); font-weight: 800; font-size: var(--text-hero); line-height: var(--leading-tight); letter-spacing: -0.02em; color: var(--text-primary); margin-bottom: 1.25rem; }
   .subtitle { font-size: var(--text-body); line-height: var(--leading-normal); color: var(--text-secondary); max-width: 520px; margin-bottom: 1.5rem; }
@@ -251,7 +252,7 @@ const meta = metaEntry?.data;
   .icon-grid img { width: 100%; height: 100%; max-width: 52px; max-height: 52px; object-fit: contain; place-self: center; }
   .panel-left .icon-grid img { opacity: 0.1; filter: brightness(0) invert(0.9); }
   .panel-right .icon-grid img { opacity: 0.12; filter: brightness(0) invert(0.85) sepia(1) hue-rotate(182deg) saturate(5) brightness(1.2); }
-  .panel-content { position: relative; z-index: 1; margin: inherit; padding: inherit; }
+  .panel-content { position: relative; z-index: 1; margin: inherit !important; padding: inherit !important; }
   .panel-label { font-family: var(--font-body); font-size: var(--text-label); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.75rem; display: block; color: var(--text-muted); }
   .panel-right .panel-label { color: var(--text-accent); }
   .panel-headline { font-weight: 700; font-size: clamp(1.4rem, 2.5vw, 1.75rem); line-height: 1.25; color: var(--text-primary); margin-bottom: 1.25rem; }
