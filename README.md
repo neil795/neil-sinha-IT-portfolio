@@ -1,53 +1,42 @@
-# OpenClaw Agentic AI Engineering Best Practices
+# Neil Sinha — Platform + AI Engineering Portfolio
 
-A practical, reusable engineering operating system for agent-assisted software delivery.
+🔗 **Live site:** [neil.webfoundryprivatelimited.com](https://neil.webfoundryprivatelimited.com)
 
-This repository distills battle-tested patterns from real-world execution into portable templates and playbooks you can apply to any product team.
+A premium, scroll-driven engineering portfolio built with Astro, deployed on Cloudflare Pages — and governed by the same engineering discipline I apply to production systems.
 
-## What you'll find here
+[INSERT SCREENSHOT HERE]
 
-- **Issue → PR governance** with enforceable quality gates
-- **Playbook-first execution** routing by domain (frontend/backend/sre/release/security)
-- **Proof-bundle delivery discipline** (PR URL + SHA + validation evidence)
-- **Staged release management** (build once, promote many, rollback-ready)
-- **Refactor slicing strategy** for large/high-risk changes
-- **Operational health check patterns** for ongoing reliability
+## What makes this repo different
+
+This isn't just a portfolio website. It's a demonstration of **governed AI-assisted development** using OpenClaw — an agentic AI engineering operating system.
+
+Every change to this site was planned, prompted, reviewed, and shipped using:
+- Issue-first workflow with proof-bundle delivery
+- Playbook-routed execution by domain
+- CI quality gates and merge discipline
+- Human review at every decision point
+
+## Tech stack
+
+- **Framework:** Astro 5 (static output)
+- **Hosting:** Cloudflare Pages
+- **Design:** Dark-mode SPA with scroll-driven narrative
+- **Governance:** OpenClaw playbooks + proof-bundle discipline
 
 ## Repository layout
 
-- `docs/playbooks/` — domain playbooks and task intake routing
-- `templates/` — PR/issue templates and workflow examples
-- `frameworks/` — governance and delivery frameworks
-- `case-studies/` — anonymized implementation examples
-- `content/portfolio/` — structured content seed (About, Experience, Projects, Web Foundry, AI governance, CTA)
+| Directory | Purpose |
+|-----------|---------|
+| `web/` | Astro portfolio site (source + build) |
+| `docs/playbooks/` | Domain playbooks and task intake routing |
+| `templates/` | PR/issue templates and workflow examples |
+| `frameworks/` | Governance and delivery frameworks |
+| `case-studies/` | Anonymized implementation examples |
+| `content/portfolio/` | Structured content seed |
 
-## Core principles
+## OpenClaw Governance Framework
 
-1. **Plan before code** for non-trivial tasks.
-2. **Proof over claims** — never mark done without evidence.
-3. **Small safe slices** for large refactors.
-4. **Automate governance** so quality doesn’t depend on memory.
-5. **Keep rollback paths explicit** on every meaningful change.
-
-## Getting started
-
-1. Copy the templates you need into your repo.
-2. Adopt the `docs/playbooks/00-task-intake-routing.md` workflow.
-3. Wire CI checks from `.github/workflows/` examples.
-4. Require proof-bundle comments for issue-linked PRs.
-
-## Architecture decisions
-
-- ADR-001 (framework/deploy/motion): `docs/adr/001-framework-and-deployment.md`
-
-## Release operations
-
-- Promotion checklist: `docs/release/promotion-checklist.md`
-- Rollback playbook: `docs/release/rollback-playbook.md`
-- Validation evidence: `docs/release/validation-evidence.md`
-- Local container runbook: `docs/deploy/local-container.md`
-- Container build pipeline: `docs/deploy/container-pipeline.md`
-- k3d deployment runbook: `docs/deploy/k3d-deploy.md`
+[Then include the existing content about governance principles, core principles, getting started, etc.]
 
 ## License
 
