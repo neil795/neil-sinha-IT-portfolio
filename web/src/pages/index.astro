@@ -8,21 +8,17 @@ const caseStudies = (await getCollection('case-studies')).sort((a, b) => a.data.
 const experience = (await getCollection('experience')).sort((a, b) => a.data.order - b.data.order);
 const aiGovernance = (await getCollection('ai-governance')).sort((a, b) => a.data.order - b.data.order);
 
-const parseNumericToken = (value: string) => {
-  const match = value.match(/-?\d+(?:\.\d+)?/);
-  if (!match) return null;
-  const full = match[0];
-  const num = Number(full);
-  const index = value.indexOf(full);
-  const prefix = value.slice(0, index);
-  const suffix = value.slice(index + full.length);
-  return { num, prefix, suffix };
-};
-
 const caseVisualBySlug: Record<string, string> = {
   'anz-platform-acceleration': '/assets/case-anz-flow.svg',
   'humanforce-ci-reliability': '/assets/case-humanforce-flow.svg',
   'chat-erp-governed-delivery': '/assets/case-chat-erp-governance.svg',
+};
+
+const countMetaByLabel: Record<string, { from: number; to: number }> = {
+  'Monorepo build duration': { from: 18, to: 3 },
+  'Production defects': { from: 0, to: 37 },
+  'Manual streaming validation': { from: 0, to: 60 },
+  'Build failures': { from: 0, to: 40 },
 };
 
 const meta = metaEntry?.data;
@@ -30,324 +26,302 @@ const meta = metaEntry?.data;
 
 <Layout>
   <SiteNav />
-  <main id="main-content" class="page">
-    <section id="hero" class="section hero" aria-labelledby="hero-title" data-section>
-      <p class="eyebrow">Neil Sinha · Platform + AI Engineering</p>
-      <h1 id="hero-title">{meta?.heroTitle}</h1>
-      <p class="subtitle">{meta?.heroSubtitle}</p>
-      <div class="proof-pills" aria-label="Outcome highlights">
-        <span data-reveal>83% faster build cycles</span>
-        <span data-reveal>−40% CI build failures</span>
-        <span data-reveal>RTO 8h → 4h</span>
-      </div>
-    </section>
-
-    <section id="problem-landscape" class="section" aria-labelledby="problem-title" data-section data-reveal>
-      <h2 id="problem-title">Problem Landscape</h2>
-      <div class="problem-grid" data-reveal-stagger>
-        <article>
-          <p class="stat"><span data-count-up data-count-from="0" data-count-to="32">32</span>%</p>
-          <p>Cloud spend routinely wasted without active controls.</p>
+  <main id="main-content">
+    <section id="hero" class="hero-split" data-section>
+      <div class="hero-panels">
+        <article class="hero-panel hero-panel-platform">
+          <p class="hero-label">PLATFORM / DEVOPS</p>
+          <h2>I break things less.</h2>
+          <ul>
+            <li>Delivery discipline</li>
+            <li>CI/CD reliability</li>
+            <li>Cloud cost control</li>
+          </ul>
         </article>
-        <article>
-          <p class="stat"><span data-count-up data-count-from="0" data-count-to="1">1</span> in 5</p>
-          <p>Deployments fail in teams lacking CI reliability discipline.</p>
-        </article>
-        <article>
-          <p class="stat">High</p>
-          <p>AI-assisted delivery risk rises when governance is ad hoc.</p>
+        <article class="hero-panel hero-panel-data">
+          <p class="hero-label hero-label-accent">DATA / AI SYSTEMS</p>
+          <h2>I make systems smarter.</h2>
+          <ul>
+            <li>Streaming pipelines</li>
+            <li>AI governance controls</li>
+            <li>Automation at scale</li>
+          </ul>
         </article>
       </div>
     </section>
 
-    <section id="operating-philosophy" class="section" aria-labelledby="philosophy-title" data-section data-reveal>
-      <h2 id="philosophy-title">Operating Philosophy</h2>
-      <div class="philosophy-grid" data-reveal-stagger>
-        <article class="flat-block"><h3>Cost Discipline</h3><p>Engineer systems so spend stays forecastable and tied to outcomes.</p></article>
-        <article class="flat-block"><h3>Reliability First</h3><p>Prioritize repeatability and recovery over brittle delivery speed.</p></article>
-        <article class="flat-block"><h3>Observability</h3><p>Surface health and latency signals early so failures are predictable.</p></article>
-        <article class="flat-block"><h3>Safe AI Adoption</h3><p>Acceleration only counts when controls and auditability stay intact.</p></article>
+    <section class="hero-unified" data-section>
+      <div class="container-narrow">
+        <p class="eyebrow">NEIL SINHA · PLATFORM + AI ENGINEERING</p>
+        <h1>I design systems that are both reliable and adaptive.</h1>
+        <p class="subtitle">{meta?.heroSubtitle}</p>
+        <div class="proof-pills" aria-label="Outcome highlights" data-reveal-stagger>
+          <span data-reveal>83% faster build cycles</span>
+          <span data-reveal>−40% CI build failures</span>
+          <span data-reveal>RTO 8h → 4h</span>
+        </div>
       </div>
     </section>
 
-    <section id="case-studies" class="section" aria-labelledby="case-studies-title" data-section data-reveal>
-      <h2 id="case-studies-title">Case Studies</h2>
-      <div class="case-list" data-reveal-stagger>
-        {caseStudies.map((entry) => (
-          <article class="case-card">
-            <p class="case-context">{entry.data.companyContext}</p>
-            <h3>{entry.data.title}</h3>
-            <div class="metric-row">
-              {entry.data.impact.slice(0, 3).map((metric) => {
-                const parsed = parseNumericToken(metric.after);
-                return (
-                  <div class="metric-block" aria-label={`${metric.label} changed from ${metric.before} to ${metric.after}`}>
-                    <p class="metric-value">
-                      {metric.before} → {parsed ? (
-                        <>
-                          {parsed.prefix}
-                          <span data-count-up data-count-from={parsed.num < 0 ? 0 : Math.max(0, Math.floor(parsed.num * 2))} data-count-to={parsed.num}>{parsed.num}</span>
-                          {parsed.suffix}
-                        </>
-                      ) : metric.after}
-                    </p>
-                    <p class="metric-label">{metric.label}</p>
-                  </div>
-                );
-              })}
-            </div>
-            {caseVisualBySlug[entry.data.slug] && (
-              <img class="case-visual" src={caseVisualBySlug[entry.data.slug]} alt={`Architecture summary for ${entry.data.title}`} loading="lazy" />
-            )}
-            <p><strong>Problem:</strong> {entry.data.problem}</p>
-            <p><strong>Intervention:</strong> {entry.data.intervention}</p>
-            <p><strong>Tradeoff:</strong> {entry.data.tradeoffs}</p>
+    <section id="problem-landscape" class="section section-deep" aria-labelledby="problem-title" data-section>
+      <div class="container-narrow">
+        <h2 id="problem-title" data-reveal>Problem Landscape</h2>
+        <div class="problem-grid" data-reveal-stagger>
+          <article data-reveal>
+            <p class="stat"><span data-count-from="0" data-count-to="32">32</span>%</p>
+            <p>Cloud spend routinely wasted without active controls.</p>
           </article>
-        ))}
-      </div>
-    </section>
-
-    <section id="ai-governance" class="section" aria-labelledby="governance-title" data-section data-reveal>
-      <h2 id="governance-title">AI Governance in Practice</h2>
-      <div class="compact-grid" data-reveal-stagger>
-        {aiGovernance.map((entry) => (
-          <article class="dense-card">
-            <h3>{entry.data.title}</h3>
-            <p class="dense-kicker"><strong>Risk reduction:</strong> {entry.data.riskReduction}</p>
-            <ul>
-              <li><strong>Failure mode:</strong> {entry.data.failureMode}</li>
-              <li class="secondary"><strong>Blast radius:</strong> {entry.data.blastRadius}</li>
-              <li class="secondary"><strong>Guardrail:</strong> {entry.data.guardrailAdded}</li>
-            </ul>
+          <article data-reveal>
+            <p class="stat"><span data-count-from="0" data-count-to="1">1</span> in 5</p>
+            <p>Deployments fail in teams lacking CI reliability discipline.</p>
           </article>
-        ))}
-      </div>
-    </section>
-
-    <section id="experience" class="section" aria-labelledby="experience-title" data-section data-reveal>
-      <h2 id="experience-title">Experience</h2>
-      <div class="compact-grid" data-reveal-stagger>
-        {experience.map((entry) => (
-          <article class="dense-card">
-            <p class="muted">{entry.data.period} · {entry.data.company}</p>
-            <h3>{entry.data.title}</h3>
-            <p>{entry.data.summary}</p>
-            <ul>
-              {entry.data.highlights.map((h, idx) => <li class={idx > 1 ? 'secondary' : ''}>{h}</li>)}
-            </ul>
+          <article data-reveal>
+            <p class="stat">High</p>
+            <p>AI-assisted delivery risk rises when governance is ad hoc.</p>
           </article>
-        ))}
+        </div>
       </div>
     </section>
 
-    <section id="web-foundry" class="section" aria-labelledby="web-foundry-title" data-section data-reveal>
-      <h2 id="web-foundry-title">Web Foundry</h2>
-      <article class="elevated-block">
-        <p>Operator-led consulting across platform modernization, cost governance, and release reliability for delivery-focused teams.</p>
-        <div class="tag-row"><span>Cloud Cost Control</span><span>CI/CD Reliability</span><span>AI Governance Controls</span></div>
-      </article>
-    </section>
-
-    <section id="trust" class="section" aria-labelledby="trust-title" data-section data-reveal>
-      <h2 id="trust-title">Trust Layer</h2>
-      <p class="subtitle">Trusted across enterprise, scale-up, and research environments with measured delivery outcomes.</p>
-      <div class="logo-strip" aria-label="Organizations and institutions">
-        <span>ANZ</span>
-        <span>Humanforce</span>
-        <span>mPrest</span>
-        <span>Monash</span>
+    <section id="operating-philosophy" class="section section-primary" aria-labelledby="philosophy-title" data-section>
+      <div class="container-narrow">
+        <h2 id="philosophy-title" data-reveal>Operating Philosophy</h2>
+        <div class="philosophy-grid" data-reveal-stagger>
+          <article class="flat-block" data-reveal><h3>Cost Discipline</h3><p>Engineer systems so spend stays forecastable and tied to outcomes.</p></article>
+          <article class="flat-block" data-reveal><h3>Reliability First</h3><p>Prioritize repeatability and recovery over brittle delivery speed.</p></article>
+          <article class="flat-block" data-reveal><h3>Observability</h3><p>Surface health and latency signals early so failures are predictable.</p></article>
+          <article class="flat-block" data-reveal><h3>Safe AI Adoption</h3><p>Acceleration only counts when controls and auditability stay intact.</p></article>
+        </div>
       </div>
     </section>
 
-    <section id="contact" class="section section-inverse cta" aria-labelledby="contact-title" data-section data-reveal>
-      <h2 id="contact-title">{meta?.ctaPrimary}</h2>
-      <p>{meta?.ctaConsulting}</p>
-      <div class="cta-actions" role="group" aria-label="Contact actions">
-        <a class="btn" href="mailto:hello@webfoundry.au">Email</a>
-        <a class="btn" href="https://www.linkedin.com/in/neil-sinha-ai-engineer/" target="_blank" rel="noreferrer">LinkedIn</a>
+    <section id="case-studies" class="section section-surface" aria-labelledby="case-studies-title" data-section>
+      <div class="container-wide">
+        <h2 id="case-studies-title" class="section-title-primary" data-reveal>Case Studies</h2>
+        <div class="case-list">
+          {caseStudies.map((entry) => (
+            <article class="case-card" data-reveal>
+              <p class="case-context">{entry.data.companyContext}</p>
+              <h3>{entry.data.title}</h3>
+              <div class="metric-row">
+                {entry.data.impact.slice(0, 3).map((metric) => {
+                  const countMeta = countMetaByLabel[metric.label];
+                  return (
+                    <div class="metric-block" aria-label={`${metric.label} changed from ${metric.before} to ${metric.after}`}>
+                      <p class="metric-value">
+                        {metric.before} → {countMeta ? (
+                          <>
+                            {metric.after.includes('-') ? '-' : ''}
+                            <span data-count-from={countMeta.from} data-count-to={countMeta.to}>{countMeta.to}</span>
+                            {metric.after.replace(/-?\d+/, '')}
+                          </>
+                        ) : metric.after}
+                      </p>
+                      <p class="metric-label">{metric.label}</p>
+                    </div>
+                  );
+                })}
+              </div>
+              {caseVisualBySlug[entry.data.slug] && (
+                <img class="case-visual" src={caseVisualBySlug[entry.data.slug]} alt={`Architecture summary for ${entry.data.title}`} loading="lazy" />
+              )}
+              <p><strong>Problem:</strong> {entry.data.problem}</p>
+              <p><strong>Intervention:</strong> {entry.data.intervention}</p>
+              <p><strong>Tradeoff:</strong> {entry.data.tradeoffs}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="ai-governance" class="section section-primary" aria-labelledby="governance-title" data-section>
+      <div class="container-wide">
+        <h2 id="governance-title" data-reveal>AI Governance in Practice</h2>
+        <div class="governance-grid" data-reveal-stagger>
+          {aiGovernance.map((entry, index) => (
+            <article class={`governance-card severity-${index === 1 ? 'medium' : 'high'}`} data-reveal>
+              <h3>{entry.data.title}</h3>
+              <p><strong>Failure mode:</strong> {entry.data.failureMode}</p>
+              <p><strong>Blast radius:</strong> {entry.data.blastRadius}</p>
+              <p><strong>Guardrail:</strong> {entry.data.guardrailAdded}</p>
+              <p class="risk-reduction"><strong>Risk reduction:</strong> {entry.data.riskReduction}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="experience" class="section section-surface" aria-labelledby="experience-title" data-section>
+      <div class="container-wide">
+        <h2 id="experience-title" class="section-title-primary" data-reveal>Experience</h2>
+        <div class="timeline" data-reveal-stagger>
+          {experience.map((entry, index) => (
+            <article class={`timeline-item ${index === 0 ? 'current' : ''}`} data-reveal>
+              <div class="timeline-meta">
+                <p>{entry.data.period}</p>
+                <p>{entry.data.company}</p>
+              </div>
+              <div class="timeline-body">
+                <h3>{entry.data.title}</h3>
+                <p>{entry.data.summary}</p>
+                <ul>
+                  {entry.data.highlights.map((h) => <li>{h}</li>)}
+                </ul>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="web-foundry" class="section section-primary" aria-labelledby="web-foundry-title" data-section>
+      <div class="container-narrow">
+        <h2 id="web-foundry-title" data-reveal>Web Foundry</h2>
+        <article class="web-foundry-card" data-reveal>
+          <p>Operator-led consulting across platform modernization, cost governance, and release reliability for delivery-focused teams.</p>
+          <div class="tag-row"><span>Cloud Cost Control</span><span>CI/CD Reliability</span><span>AI Governance Controls</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="trust" class="section section-primary" aria-labelledby="trust-title" data-section>
+      <div class="container-narrow">
+        <h2 id="trust-title" data-reveal>Trust Layer</h2>
+        <p class="subtitle" data-reveal>Trusted across enterprise, scale-up, and research environments with measured delivery outcomes.</p>
+        <div class="logo-strip" aria-label="Organizations and institutions" data-reveal>
+          <span>ANZ</span>
+          <span>Humanforce</span>
+          <span>mPrest</span>
+          <span>Monash</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section section-deep cta" aria-labelledby="contact-title" data-section data-reveal>
+      <div class="container-narrow">
+        <h2 id="contact-title">{meta?.ctaPrimary}</h2>
+        <p>{meta?.ctaConsulting}</p>
+        <div class="cta-actions" role="group" aria-label="Contact actions">
+          <a class="btn" href="mailto:hello@webfoundry.au">Email</a>
+          <a class="btn" href="https://www.linkedin.com/in/neil-sinha-ai-engineer/" target="_blank" rel="noreferrer">LinkedIn</a>
+        </div>
       </div>
     </section>
   </main>
 </Layout>
 
-<script>
-  // @ts-nocheck
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const sections = [...document.querySelectorAll('section[data-section]')];
-  const navLinks = [...document.querySelectorAll('[data-navlink]')];
-  const progress = document.querySelector('[data-scroll-progress]');
-  const revealEls = [...document.querySelectorAll('[data-reveal]')];
-  const staggerGroups = [...document.querySelectorAll('[data-reveal-stagger]')];
-  const counters = [...document.querySelectorAll('[data-count-up]')];
-
-  const setActive = (id) => {
-    navLinks.forEach((link) => {
-      const active = link.getAttribute('href') === `#${id}`;
-      if (active) link.setAttribute('aria-current', 'true');
-      else link.removeAttribute('aria-current');
-    });
-  };
-
-  const animateCounter = (el) => {
-    if (prefersReduced || el.dataset.animated === 'true') return;
-    const from = Number(el.dataset.countFrom ?? 0);
-    const to = Number(el.dataset.countTo ?? 0);
-    const duration = 1100;
-    const start = performance.now();
-    const step = (now) => {
-      const t = Math.min(1, (now - start) / duration);
-      const eased = 1 - Math.pow(1 - t, 4);
-      const value = Math.round(from + (to - from) * eased);
-      el.textContent = `${value}`;
-      if (t < 1) requestAnimationFrame(step);
-      else el.dataset.animated = 'true';
-    };
-    requestAnimationFrame(step);
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      entry.target.setAttribute('data-visible', 'true');
-      if (entry.target.matches('[data-count-up]')) animateCounter(entry.target);
-      observer.unobserve(entry.target);
-    });
-  }, { threshold: 0.15 });
-
-  revealEls.forEach((el) => observer.observe(el));
-  counters.forEach((el) => observer.observe(el));
-  staggerGroups.forEach((group) => {
-    [...group.children].forEach((child) => {
-      child.setAttribute('data-reveal', '');
-      observer.observe(child);
-    });
-  });
-
-  if (sections.length > 0) {
-    const navObserver = new IntersectionObserver((entries) => {
-      const visible = entries
-        .filter((e) => e.isIntersecting)
-        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-      if (visible?.target?.id) setActive(visible.target.id);
-    }, { threshold: [0.2, 0.5, 0.75] });
-
-    sections.forEach((section) => navObserver.observe(section));
-  }
-
-  const themeToggle = document.querySelector('[data-theme-toggle]');
-  const themeLabel = () => {
-    const current = document.documentElement.getAttribute('data-theme') || 'light';
-    if (themeToggle) themeToggle.textContent = current === 'dark' ? 'Dark' : 'Light';
-  };
-  themeLabel();
-  themeToggle?.addEventListener('click', () => {
-    const current = document.documentElement.getAttribute('data-theme') || 'light';
-    const next = current === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', next);
-    localStorage.setItem('portfolio-theme', next);
-    themeLabel();
-  });
-
-  const updateProgress = () => {
-    if (!progress) return;
-    const scrollTop = window.scrollY;
-    const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const pct = scrollHeight > 0 ? Math.min(100, Math.max(0, (scrollTop / scrollHeight) * 100)) : 0;
-    progress.style.width = `${pct}%`;
-    document.documentElement.style.setProperty('--scroll-y', `${Math.min(8, scrollTop * 0.02)}px`);
-  };
-
-  updateProgress();
-  window.addEventListener('scroll', updateProgress, { passive: true });
-</script>
-
 <style>
-  .page { max-width: 1100px; margin: 0 auto; padding: var(--space-xl) 1.25rem var(--space-3xl); }
-  .section { margin: 0 0 var(--space-section); scroll-margin-top: 96px; position: relative; padding: var(--space-lg); border-radius: var(--radius-lg); }
-  .section:nth-of-type(even) { background: color-mix(in oklab, var(--bg-elevated) 72%, transparent); }
-  .section + .section::before {
+  .container-narrow { max-width: var(--content-max-width); margin: 0 auto; padding: 0 1.25rem; }
+  .container-wide { max-width: var(--content-wide-max-width); margin: 0 auto; padding: 0 1.25rem; }
+
+  .section { padding-top: var(--space-section); padding-bottom: var(--space-section); }
+  .section-primary { background: var(--bg-primary); }
+  .section-surface { background: var(--bg-surface); }
+  .section-deep { background: var(--bg-deep); }
+
+  .hero-split { background: var(--bg-primary); }
+  .hero-panels { display: grid; grid-template-columns: 1fr 1fr; min-height: 50vh; }
+  .hero-panel { padding: var(--space-3xl); }
+  .hero-panel h2 { margin: var(--space-sm) 0 var(--space-md); font-size: clamp(1.5rem, 3vw, 2rem); color: var(--text-primary); font-weight: 700; }
+  .hero-panel ul { margin: 0; padding-left: 1.15rem; color: var(--text-secondary); font-size: var(--text-small); }
+  .hero-label { color: var(--text-muted); font-size: var(--text-label); letter-spacing: var(--tracking-widest); text-transform: uppercase; }
+  .hero-label-accent { color: var(--text-accent); }
+  .hero-panel-platform { background: var(--bg-elevated); }
+  .hero-panel-data { background: var(--bg-deep); clip-path: polygon(8% 0, 100% 0, 100% 100%, 0% 100%); }
+  .hero-panel-data h2 { font-family: var(--font-mono); }
+
+  .hero-unified { background: var(--bg-primary); padding-top: var(--space-section); padding-bottom: var(--space-3xl); }
+  .eyebrow { color: var(--text-muted); font-size: var(--text-label); letter-spacing: var(--tracking-widest); text-transform: uppercase; }
+  h1 { font-size: var(--text-hero); line-height: var(--leading-tight); letter-spacing: var(--tracking-tight); margin: var(--space-sm) 0 var(--space-lg); max-width: 17ch; font-weight: 800; }
+  h2 { color: var(--text-primary); font-size: var(--text-section); margin: 0 0 var(--space-xl); font-weight: 700; }
+  .section-title-primary { font-weight: 800; }
+  .section-title-primary::after {
     content: '';
-    position: absolute;
-    left: 12%;
-    right: 12%;
-    top: calc(var(--space-section) * -0.5);
-    height: 1px;
-    background: linear-gradient(to right, transparent, var(--border-default), transparent);
+    display: block;
+    width: 48px;
+    height: 3px;
+    margin-top: var(--space-sm);
+    background: var(--accent);
+    border-radius: 2px;
   }
-  .eyebrow { font-size: var(--text-small); text-transform: uppercase; letter-spacing: .08em; color: var(--text-muted); }
-  h1 { font-size: var(--text-hero); line-height: var(--leading-tight); max-width: 16ch; margin: var(--space-xs) 0 var(--space-md); }
-  h2 { font-size: var(--text-section); margin-bottom: var(--space-lg); }
-  h3 { font-size: var(--text-card-title); margin: 0 0 var(--space-sm); }
-  .subtitle { color: var(--text-secondary); max-width: 70ch; line-height: var(--leading-normal); }
+  h3 { color: var(--text-primary); font-size: var(--text-card-title); margin: 0 0 var(--space-sm); font-weight: 700; }
+  .subtitle { color: var(--text-secondary); max-width: 600px; }
 
-  [data-reveal] {
-    opacity: 0;
-    transform: translateY(16px);
-    transition: opacity var(--duration-slow) var(--ease-out), transform var(--duration-slow) var(--ease-out);
-  }
-  [data-reveal][data-visible='true'] {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  .proof-pills { display: flex; flex-wrap: wrap; gap: var(--space-sm); margin-top: var(--space-lg); }
+  .proof-pills span { border: 1px solid var(--border-medium); border-radius: var(--radius-sm); padding: var(--space-xs) var(--space-md); font-size: var(--text-small); color: var(--text-secondary); font-variant-numeric: tabular-nums; }
 
-  [data-reveal-stagger] > *:nth-child(1) { transition-delay: 0ms; }
-  [data-reveal-stagger] > *:nth-child(2) { transition-delay: 80ms; }
-  [data-reveal-stagger] > *:nth-child(3) { transition-delay: 160ms; }
-  [data-reveal-stagger] > *:nth-child(4) { transition-delay: 240ms; }
-  [data-reveal-stagger] > *:nth-child(5) { transition-delay: 320ms; }
+  .problem-grid { display: grid; gap: var(--space-md); grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .problem-grid article { background: var(--bg-elevated); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: var(--space-lg); }
+  .problem-grid p { color: var(--text-secondary); }
+  .stat { margin: 0 0 var(--space-sm); color: var(--text-accent); font-size: var(--text-stat); font-weight: 700; }
 
-  .proof-pills, .tag-row { display: flex; gap: var(--space-sm); flex-wrap: wrap; margin-top: var(--space-md); }
-  .proof-pills span, .tag-row span { font-size: var(--text-small); padding: .4rem .65rem; border-radius: var(--radius-md); background: var(--bg-elevated); border: 1px solid var(--border-default); }
-
-  .section-inverse { background: var(--bg-inverse); color: var(--text-inverse); border-radius: var(--radius-lg); padding: var(--space-xl); }
-  .section-inverse h2, .section-inverse p { color: var(--text-inverse); }
-
-  .problem-grid { display: grid; gap: var(--space-md); grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); }
-  .problem-grid article { background: var(--bg-elevated); border: 1px solid var(--border-default); border-radius: var(--radius-md); padding: var(--space-md); }
-  .stat { font-size: 2rem; font-weight: 700; margin: 0 0 .25rem; color: var(--accent); font-variant-numeric: tabular-nums; }
-
-  .philosophy-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: var(--space-lg); }
-  .flat-block { padding: 0; }
-  .flat-block p { color: var(--text-secondary); line-height: var(--leading-normal); }
+  .philosophy-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-lg); }
+  .flat-block p { color: var(--text-secondary); }
 
   .case-list { display: grid; gap: var(--space-lg); }
-  .case-card { background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: var(--radius-lg); padding: var(--space-lg); box-shadow: var(--shadow-md); transition: transform var(--duration-normal) var(--ease-out), box-shadow var(--duration-normal) var(--ease-out); }
-  .case-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
-  .case-context { margin: 0 0 .35rem; font-size: var(--text-xs); color: var(--text-muted); text-transform: uppercase; letter-spacing: .06em; }
-  .metric-row { display: grid; gap: var(--space-sm); grid-template-columns: repeat(auto-fit,minmax(190px,1fr)); margin: var(--space-md) 0; }
-  .metric-block { background: var(--bg-elevated); border: 1px solid var(--border-default); border-radius: var(--radius-md); padding: .6rem .75rem; }
-  .metric-value { margin: 0; font-size: 1.35rem; line-height: 1.2; color: var(--accent); font-weight: 700; font-variant-numeric: tabular-nums; }
-  .metric-label { margin: .2rem 0 0; font-size: var(--text-xs); color: var(--text-muted); }
-  .case-visual { width: 100%; border: 1px solid var(--border-default); border-radius: var(--radius-md); background: var(--bg-primary); margin: .25rem 0 var(--space-md); }
-
-  .compact-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: var(--space-md); }
-  .dense-card { background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: var(--radius-md); padding: var(--space-md); }
-  .dense-card p, .dense-card li { color: var(--text-secondary); line-height: var(--leading-normal); }
-  .dense-card ul { margin: .5rem 0 0; padding-left: 1rem; }
-  .dense-card li.secondary { opacity: 0.68; font-size: 0.96em; }
-  .dense-kicker { margin: .2rem 0 .4rem; }
-
-  .elevated-block { background: var(--bg-elevated); border: 1px solid var(--border-default); border-radius: var(--radius-md); padding: var(--space-lg); }
-
-  .logo-strip { display: flex; gap: var(--space-sm); flex-wrap: wrap; margin-top: var(--space-md); }
-  .logo-strip span {
-    padding: .4rem .65rem;
-    border: 1px solid var(--border-default);
-    border-radius: 999px;
-    font-size: var(--text-small);
-    color: var(--text-secondary);
-    background: var(--bg-surface);
-    letter-spacing: 0.02em;
+  .case-card {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    padding: var(--space-xl);
+    transition: all var(--duration-normal) var(--ease-out);
   }
+  .case-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-card-hover); border-color: var(--border-medium); }
+  .case-context { color: var(--text-accent); font-size: var(--text-xs); letter-spacing: var(--tracking-wide); text-transform: uppercase; margin: 0 0 var(--space-xs); }
+  .metric-row { display: grid; gap: var(--space-sm); grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); margin: var(--space-lg) 0; }
+  .metric-block { background: var(--bg-primary); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: var(--space-sm) var(--space-md); }
+  .metric-value { margin: 0; color: var(--text-accent); font-weight: 700; font-size: 1.35rem; }
+  .metric-label { margin: var(--space-xs) 0 0; color: var(--text-muted); font-size: var(--text-xs); }
+  .case-card p { color: var(--text-secondary); }
+  .case-visual { width: 100%; background: var(--bg-primary); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: var(--space-md); margin-bottom: var(--space-md); }
 
-  .cta { margin-bottom: 0; }
-  .cta-actions { display: flex; gap: var(--space-sm); flex-wrap: wrap; margin-top: var(--space-md); }
-  .btn { display: inline-flex; align-items: center; justify-content: center; border-radius: var(--radius-md); padding: .6rem .95rem; font-weight: 600; text-decoration: none; background: var(--bg-surface); color: var(--text-primary); border: 1px solid transparent; }
-  .btn:hover { background: var(--accent-subtle); border-color: color-mix(in oklab, var(--accent) 35%, transparent); }
+  .governance-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-md); }
+  .governance-card { background: var(--bg-elevated); border-radius: var(--radius-md); border: 1px solid var(--border-subtle); border-left: 3px solid var(--severity-high); padding: var(--space-lg); }
+  .governance-card.severity-medium { border-left-color: var(--severity-medium); }
+  .governance-card p { color: var(--text-secondary); }
+  .risk-reduction { color: var(--severity-resolved) !important; }
 
-  @media (prefers-reduced-motion: reduce) {
-    [data-reveal] { opacity: 1; transform: none; transition: none; }
-    .case-card { transition: none; }
-    .case-card:hover { transform: none; box-shadow: var(--shadow-md); }
+  .timeline { display: grid; gap: var(--space-lg); position: relative; }
+  .timeline::before { content: ''; position: absolute; left: 201px; top: 0; bottom: 0; width: 2px; background: var(--border-subtle); }
+  .timeline-item { display: grid; grid-template-columns: 200px 1fr; gap: var(--space-xl); position: relative; }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: 194px;
+    top: 0.35rem;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--bg-elevated);
+    border: 2px solid var(--border-medium);
+  }
+  .timeline-item.current::before { background: var(--accent-glow); border-color: var(--accent); box-shadow: 0 0 0 6px var(--accent-glow); }
+  .timeline-meta { color: var(--text-muted); font-size: var(--text-small); }
+  .timeline-meta p { margin: 0 0 var(--space-xs); }
+  .timeline-body p, .timeline-body li { color: var(--text-secondary); font-size: var(--text-small); }
+  .timeline-body ul { margin: var(--space-sm) 0 0; padding-left: 1rem; }
+
+  .web-foundry-card { background: var(--bg-elevated); border: 1px solid var(--border-accent); border-radius: var(--radius-lg); padding: var(--space-xl); }
+  .web-foundry-card p { color: var(--text-secondary); }
+  .tag-row { display: flex; gap: var(--space-sm); flex-wrap: wrap; margin-top: var(--space-lg); }
+  .tag-row span { border: 1px solid var(--border-medium); color: var(--text-secondary); border-radius: var(--radius-sm); padding: var(--space-xs) var(--space-md); font-size: var(--text-small); }
+
+  .logo-strip { display: flex; gap: var(--space-sm); flex-wrap: wrap; margin-top: var(--space-lg); }
+  .logo-strip span { border: 1px solid var(--border-medium); border-radius: var(--radius-sm); padding: var(--space-xs) var(--space-md); font-size: var(--text-small); color: var(--text-primary); font-weight: 500; letter-spacing: var(--tracking-wide); }
+
+  .cta p { color: var(--text-secondary); }
+  .cta-actions { display: flex; gap: var(--space-sm); flex-wrap: wrap; margin-top: var(--space-lg); }
+  .btn { display: inline-flex; align-items: center; justify-content: center; text-decoration: none; border-radius: var(--radius-md); padding: 0.6rem 0.95rem; color: var(--text-primary); background: var(--bg-elevated); border: 1px solid var(--border-subtle); }
+  .btn:hover { border-color: var(--border-accent); background: var(--accent-glow); }
+
+  @media (max-width: 768px) {
+    .hero-panels { grid-template-columns: 1fr; min-height: auto; }
+    .hero-panel { padding: var(--space-xl); }
+    .hero-panel-data { clip-path: none; }
+
+    .timeline::before { display: none; }
+    .timeline-item { grid-template-columns: 1fr; gap: var(--space-sm); }
+    .timeline-item::before { display: none; }
   }
 </style>
