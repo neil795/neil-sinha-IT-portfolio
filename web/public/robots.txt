@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://neil.webfoundryprivatelimited.com/sitemap.xml

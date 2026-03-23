@@ -245,9 +245,11 @@ const meta = metaEntry?.data;
       <div class="container-wide">
         <h2 id="contact-title">{meta?.ctaPrimary}</h2>
         <p>{meta?.ctaConsulting}</p>
+        <p class="contact-lines">Business inquiries: neil@webfoundryprivatelimited.com<br />Career opportunities: aaditya.n.sinha@gmail.com</p>
         <div class="cta-actions" role="group" aria-label="Contact actions">
-          <a class="btn" href="mailto:hello@webfoundry.au">Email</a>
-          <a class="btn" href="https://www.linkedin.com/in/neil-sinha-ai-engineer/" target="_blank" rel="noreferrer">LinkedIn</a>
+          <a class="btn" href="mailto:neil@webfoundryprivatelimited.com?subject=Web%20Foundry%20Inquiry">Get in touch</a>
+          <a class="btn" href="https://www.linkedin.com/in/aaditya-neil-sinha/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a class="btn" href="/neil-sinha-resume.pdf" target="_blank" rel="noopener noreferrer">Download resume</a>
         </div>
       </div>
     </section>
@@ -364,6 +366,7 @@ const meta = metaEntry?.data;
   .testimonial-author span { font-size: 0.75rem; color: var(--text-muted); font-style: normal; }
 
   .cta p { color: var(--text-secondary); }
+  .contact-lines { font-size: 0.875rem; color: var(--text-muted); margin-top: -0.5rem; margin-bottom: 0.5rem; line-height: 1.55; }
   .cta-actions { display: flex; gap: var(--space-sm); flex-wrap: wrap; margin-top: var(--space-lg); }
   .btn { display: inline-flex; align-items: center; justify-content: center; text-decoration: none; border-radius: var(--radius-md); padding: 0.6rem 0.95rem; color: var(--text-primary); background: var(--bg-elevated); border: 1px solid var(--border-subtle); }
   .btn:hover { border-color: var(--border-accent); background: var(--accent-glow); }
