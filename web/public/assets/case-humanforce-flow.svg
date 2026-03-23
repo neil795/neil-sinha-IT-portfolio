@@ -1,22 +1,27 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="720" height="180" viewBox="0 0 720 180" fill="none">
   <rect width="720" height="180" rx="12" fill="#0F172A"/>
+
   <rect x="28" y="28" width="180" height="66" rx="8" fill="rgba(248,113,113,0.1)" stroke="rgba(248,113,113,0.3)"/>
-  <text x="40" y="50" fill="#F87171" font-family="Inter, Arial" font-size="12">
-    <tspan x="40" dy="0">TeamCity +</tspan>
-    <tspan x="40" dy="14">Bitbucket +</tspan>
-    <tspan x="40" dy="14">ClickOps</tspan>
+  <text x="118" y="61" fill="#F87171" font-family="Inter, Arial" font-size="12" text-anchor="middle" dominant-baseline="middle">
+    <tspan x="118" dy="-14">TeamCity +</tspan>
+    <tspan x="118" dy="14">Bitbucket +</tspan>
+    <tspan x="118" dy="14">ClickOps</tspan>
   </text>
+
   <rect x="262" y="28" width="180" height="66" rx="8" fill="rgba(59,130,246,0.15)" stroke="rgba(96,165,250,0.3)"/>
-  <text x="274" y="50" fill="#60A5FA" font-family="Inter, Arial" font-size="12">
-    <tspan x="274" dy="0">GitHub Actions +</tspan>
-    <tspan x="274" dy="14">Terraform Cloud</tspan>
+  <text x="352" y="61" fill="#60A5FA" font-family="Inter, Arial" font-size="12" text-anchor="middle" dominant-baseline="middle">
+    <tspan x="352" dy="-7">GitHub Actions +</tspan>
+    <tspan x="352" dy="14">Terraform Cloud</tspan>
   </text>
+
   <rect x="496" y="28" width="180" height="66" rx="8" fill="rgba(52,211,153,0.1)" stroke="rgba(52,211,153,0.3)"/>
-  <text x="508" y="50" fill="#34D399" font-family="Inter, Arial" font-size="12">
-    <tspan x="508" dy="0">ECS/Fargate</tspan>
-    <tspan x="508" dy="14">Test Grid</tspan>
+  <text x="586" y="61" fill="#34D399" font-family="Inter, Arial" font-size="12" text-anchor="middle" dominant-baseline="middle">
+    <tspan x="586" dy="-7">ECS/Fargate</tspan>
+    <tspan x="586" dy="14">Test Grid</tspan>
   </text>
+
   <path d="M216 61h36" stroke="rgba(148,163,184,0.2)" stroke-width="2" stroke-linecap="round"/>
   <path d="M450 61h36" stroke="rgba(148,163,184,0.2)" stroke-width="2" stroke-linecap="round"/>
+
   <text x="28" y="128" fill="#B8C6D8" font-family="Inter, Arial" font-size="13">Result: ~40% fewer build failures and test duration reduced from 1 day to 1 hour.</text>
 </svg>

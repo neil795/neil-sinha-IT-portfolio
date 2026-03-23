@@ -1,27 +1,33 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="720" height="180" viewBox="0 0 720 180" fill="none">
   <rect width="720" height="180" rx="12" fill="#0F172A"/>
+
   <rect x="28" y="34" width="144" height="54" rx="8" fill="rgba(248,113,113,0.1)" stroke="rgba(248,113,113,0.3)"/>
-  <text x="40" y="56" fill="#F87171" font-family="Inter, Arial" font-size="12">
-    <tspan x="40" dy="0">Ad hoc</tspan>
-    <tspan x="40" dy="14">PR flow</tspan>
+  <text x="100" y="61" fill="#F87171" font-family="Inter, Arial" font-size="12" text-anchor="middle" dominant-baseline="middle">
+    <tspan x="100" dy="-7">Ad hoc</tspan>
+    <tspan x="100" dy="14">PR flow</tspan>
   </text>
+
   <rect x="220" y="34" width="144" height="54" rx="8" fill="rgba(59,130,246,0.15)" stroke="rgba(96,165,250,0.3)"/>
-  <text x="234" y="56" fill="#60A5FA" font-family="Inter, Arial" font-size="12">
-    <tspan x="234" dy="0">Issue-first</tspan>
-    <tspan x="234" dy="14">gates</tspan>
+  <text x="292" y="61" fill="#60A5FA" font-family="Inter, Arial" font-size="12" text-anchor="middle" dominant-baseline="middle">
+    <tspan x="292" dy="-7">Issue-first</tspan>
+    <tspan x="292" dy="14">gates</tspan>
   </text>
+
   <rect x="412" y="34" width="144" height="54" rx="8" fill="rgba(59,130,246,0.15)" stroke="rgba(96,165,250,0.3)"/>
-  <text x="426" y="56" fill="#60A5FA" font-family="Inter, Arial" font-size="12">
-    <tspan x="426" dy="0">Proof bundle</tspan>
-    <tspan x="426" dy="14">CI</tspan>
+  <text x="484" y="61" fill="#60A5FA" font-family="Inter, Arial" font-size="12" text-anchor="middle" dominant-baseline="middle">
+    <tspan x="484" dy="-7">Proof bundle</tspan>
+    <tspan x="484" dy="14">CI</tspan>
   </text>
+
   <rect x="584" y="34" width="108" height="54" rx="8" fill="rgba(52,211,153,0.1)" stroke="rgba(52,211,153,0.3)"/>
-  <text x="598" y="56" fill="#34D399" font-family="Inter, Arial" font-size="12">
-    <tspan x="598" dy="0">Safe</tspan>
-    <tspan x="598" dy="14">merge</tspan>
+  <text x="638" y="61" fill="#34D399" font-family="Inter, Arial" font-size="12" text-anchor="middle" dominant-baseline="middle">
+    <tspan x="638" dy="-7">Safe</tspan>
+    <tspan x="638" dy="14">merge</tspan>
   </text>
+
   <path d="M180 61h28" stroke="rgba(148,163,184,0.2)" stroke-width="2" stroke-linecap="round"/>
   <path d="M372 61h28" stroke="rgba(148,163,184,0.2)" stroke-width="2" stroke-linecap="round"/>
   <path d="M564 61h14" stroke="rgba(148,163,184,0.2)" stroke-width="2" stroke-linecap="round"/>
+
   <text x="28" y="128" fill="#B8C6D8" font-family="Inter, Arial" font-size="13">Governance becomes enforceable: issue link, scope checks, proof comment, and CI evidence required.</text>
 </svg>
