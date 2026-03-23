@@ -21,8 +21,8 @@ const countMetaByLabel: Record<string, { from: number; to: number }> = {
   'Build failures': { from: 0, to: 40 },
 };
 
-const platformIcons = ['kubernetes','docker','gcp','aws','openshift','terraform','github','github-actions','nginx','linux','helm','prometheus'];
-const dataIcons = ['spark','kafka','python','tensorflow','pandas','numpy','jupyter','postgresql','redis','grafana','flink','ai-generic'];
+const platformIcons = ['helm','docker','gcp','aws','opentelemetry','terraform','github','github-actions','nginx','linux','openshift','prometheus'];
+const dataIcons = ['spark','kafka','python','tensorflow','pandas','numpy','jupyter','postgresql','databricks','grafana','flink','ai-generic'];
 
 const meta = metaEntry?.data;
 ---
@@ -30,15 +30,20 @@ const meta = metaEntry?.data;
 <Layout>
   <SiteNav />
   <main id="main-content">
-    <section class="headline-section" data-section>
-      <div class="container-narrow">
-        <p class="eyebrow">NEIL SINHA · PLATFORM + AI ENGINEERING</p>
-        <h1>I design systems that are both reliable and adaptive.</h1>
-        <p class="subtitle">{meta?.heroSubtitle}</p>
-        <div class="proof-pills" aria-label="Outcome highlights" data-reveal-stagger>
-          <span data-reveal>83% faster build cycles</span>
-          <span data-reveal>−40% CI build failures</span>
-          <span data-reveal>RTO 8h → 4h</span>
+    <section class="section section-deep headline-section" data-section>
+      <div class="container-wide headline-content">
+        <div class="headline-text">
+          <p class="eyebrow">NEIL SINHA · PLATFORM + AI ENGINEERING</p>
+          <h1>I design systems that are both reliable and adaptive.</h1>
+          <p class="subtitle">{meta?.heroSubtitle}</p>
+          <div class="proof-pills" aria-label="Outcome highlights" data-reveal-stagger>
+            <span data-reveal>83% faster build cycles</span>
+            <span data-reveal>−40% CI build failures</span>
+            <span data-reveal>RTO 8h → 4h</span>
+          </div>
+        </div>
+        <div class="headline-photo">
+          <img src="/images/neil-sinha-headshot.png" alt="Neil Sinha — Senior Platform and AI-ML Engineer" width="280" height="280" loading="eager" />
         </div>
       </div>
     </section>
@@ -79,7 +84,7 @@ const meta = metaEntry?.data;
     <div class="hero-divider" aria-hidden="true"></div>
 
     <section id="problem-landscape" class="section section-deep" aria-labelledby="problem-title" data-section>
-      <div class="container-narrow">
+      <div class="container-wide">
         <h2 id="problem-title" data-reveal>Problem Landscape</h2>
         <div class="problem-grid" data-reveal-stagger>
           <article data-reveal>
@@ -99,7 +104,7 @@ const meta = metaEntry?.data;
     </section>
 
     <section id="operating-philosophy" class="section section-primary" aria-labelledby="philosophy-title" data-section>
-      <div class="container-narrow">
+      <div class="container-wide">
         <h2 id="philosophy-title" data-reveal>Operating Philosophy</h2>
         <div class="philosophy-grid" data-reveal-stagger>
           <article class="flat-block" data-reveal><h3>Cost Discipline</h3><p>Engineer systems so spend stays forecastable and tied to outcomes.</p></article>
@@ -201,13 +206,36 @@ const meta = metaEntry?.data;
 
     <section id="trust" class="section section-primary" aria-labelledby="trust-title" data-section>
       <div class="container-wide">
-        <h2 id="trust-title" data-reveal>Trust Layer</h2>
-        <p class="subtitle" data-reveal>Trusted across enterprise, scale-up, and research environments with measured delivery outcomes.</p>
-        <div class="logo-strip" aria-label="Organizations and institutions" data-reveal>
-          <span>ANZ</span>
-          <span>Humanforce</span>
-          <span>mPrest</span>
-          <span>Monash</span>
+        <h2 id="trust-title" data-reveal>Where I've Delivered</h2>
+        <div class="company-grid" aria-label="Organizations and industries" data-reveal>
+          <article class="company-card"><strong>ANZ Bank</strong><span>Banking · Enterprise</span></article>
+          <article class="company-card"><strong>Humanforce</strong><span>Workforce SaaS · Scale-up</span></article>
+          <article class="company-card"><strong>mPrest</strong><span>Critical Systems · Defense Tech</span></article>
+          <article class="company-card"><strong>Monash University</strong><span>Research · Higher Education</span></article>
+        </div>
+
+        <div class="testimonials">
+          <div class="testimonial-card">
+            <p class="testimonial-quote">I had the pleasure of working with Neil for a few years when he joined ANZ as a platform engineer, and quickly progressed to a lead engineer as the squad grew in size. Neil has the rare combination of being a brilliant engineer who is socially intelligent and driven to make a meaningful impact! I strongly recommend Neil for his technical skills, innovation and adaptability.</p>
+            <div class="testimonial-author">
+              <strong>Sourasree Ghosh</strong>
+              <span>Product Area Lead · ANZ</span>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-quote">Neil demonstrated an sharp insight and ability to see the big picture. He was quick to grasp new concepts and put them to work and demonstrated he was able to own, manage, streamline and simplify complex pieces of infrastructure; always questioning what could be improved. His technical skills combined with a huge patience and ability to combine multiple points of view makes him an invaluable team member I would love to work again anytime.</p>
+            <div class="testimonial-author">
+              <strong>Guillermo Rodriguez Alegria</strong>
+              <span>DevOps Manager & Platform Architect · Humanforce</span>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-quote">I had the pleasure of having Neil on my team, and I can confidently say he's one of the most versatile and dependable engineers I've worked with. His technical contributions were instrumental across a range of initiatives—from uplifting observability across our platforms, to implementing a robust test automation framework for critical services, and designing middleware that enabled a more flexible and scalable development environment.</p>
+            <div class="testimonial-author">
+              <strong>Angus Ng</strong>
+              <span>Tech Leadership / DevSecOps / SRE · ANZ (Direct Manager)</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -234,30 +262,44 @@ const meta = metaEntry?.data;
   .section-surface { background: var(--bg-surface); }
   .section-deep { background: var(--bg-deep); }
 
-  .headline-section { max-width: 680px; margin: 0 auto; padding: 5rem 2rem 3rem; }
-  .eyebrow { font-family: var(--font-body); font-size: var(--text-label); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1rem; }
+  
+
+  .eyebrow { font-family: var(--font-body); font-size: var(--text-label); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1rem; margin-top: 0; }
   h1 { font-family: var(--font-heading); font-weight: 800; font-size: var(--text-hero); line-height: var(--leading-tight); letter-spacing: -0.02em; color: var(--text-primary); margin-bottom: 1.25rem; }
   .subtitle { font-size: var(--text-body); line-height: var(--leading-normal); color: var(--text-secondary); max-width: 520px; margin-bottom: 1.5rem; }
   .proof-pills { display: flex; gap: 0.75rem; flex-wrap: wrap; }
   .proof-pills span { border: 1px solid var(--border-medium); border-radius: 6px; padding: 6px 14px; font-size: 13px; color: var(--text-secondary); font-variant-numeric: tabular-nums; }
 
+  .headline-section .container-wide { margin: 0 auto; padding: 5rem 2rem 3rem; }
+  .headline-content { display: flex; align-items: center; gap: 3rem; }
+  .headline-text { flex: 1; min-width: 0; }
+  .headline-photo { flex-shrink: 0; }
+  .headline-photo img {
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center 20%;
+    border: 3px solid rgba(148, 163, 184, 0.15);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+
   .hero-divider { width: 100%; height: 1px; background: linear-gradient(90deg, transparent, var(--border-subtle) 20%, var(--border-subtle) 80%, transparent); }
 
   .split-hero { display: grid; grid-template-columns: 1fr 1fr; width: 100%; min-height: 420px; }
-  .panel { position: relative; overflow: hidden; padding: 3rem; display: flex; align-items: center; }
+  .panel { position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; padding: 3rem 2rem; min-height: 420px; }
   .panel-left { background: var(--bg-elevated); }
   .panel-right { background: var(--bg-deep); clip-path: polygon(6% 0, 100% 0, 100% 100%, 0% 100%); margin-left: -4%; padding-left: calc(3rem + 4%); }
   .icon-grid { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(3, 1fr); padding: 2rem; pointer-events: none; z-index: 0; }
   .icon-grid img { width: 100%; height: 100%; max-width: 52px; max-height: 52px; object-fit: contain; place-self: center; }
-  .panel-left .icon-grid img { opacity: 0.28; filter: brightness(0) invert(0.9); }
-  .panel-right .icon-grid img { opacity: 0.32; filter: brightness(0) invert(0.85) sepia(1) hue-rotate(182deg) saturate(5) brightness(1.2); }
-  .panel-content { position: relative; z-index: 1; }
-  .panel-label { font-family: var(--font-body); font-size: var(--text-label); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.75rem; display: block; color: var(--text-muted); }
-  .panel-right .panel-label { color: var(--text-accent); }
+  .panel-left .icon-grid img { opacity: 0.18; filter: brightness(0) invert(0.7) sepia(1) hue-rotate(140deg) saturate(5); }
+  .panel-right .icon-grid img { opacity: 0.18; filter: brightness(0) invert(0.75) sepia(1) hue-rotate(15deg) saturate(6); }
+  .panel-content { position: relative; z-index: 1; max-width: 320px; width: 100%; text-align: left; }
+  .panel-label { font-family: var(--font-body); font-size: var(--text-label); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.75rem; display: block; color: #2DD4BF; }
+  .panel-right .panel-label { color: #FBBF24; }
   .panel-headline { font-weight: 700; font-size: clamp(1.4rem, 2.5vw, 1.75rem); line-height: 1.25; color: var(--text-primary); margin-bottom: 1.25rem; }
   .panel-left .panel-headline { font-family: var(--font-heading); }
-  .panel-right .panel-headline { font-family: var(--font-mono); }
-  .panel-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; margin: 0; }
+    .panel-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; margin: 0; }
   .panel-list li { font-family: var(--font-body); font-size: 14px; color: var(--text-secondary); display: flex; align-items: center; gap: 0.5rem; }
   .panel-list li::before { content: ''; display: block; width: 4px; height: 4px; border-radius: 50%; background: var(--text-muted); flex-shrink: 0; }
 
@@ -265,6 +307,7 @@ const meta = metaEntry?.data;
   .section-title-primary { font-weight: 800; }
   .section-title-primary::after { content: ''; display: block; width: 48px; height: 3px; margin-top: var(--space-sm); background: var(--accent); border-radius: 2px; }
   h3 { color: var(--text-primary); font-size: var(--text-card-title); margin: 0 0 var(--space-sm); font-weight: 700; }
+  .timeline-body h3 { font-size: 1.35rem; }
 
   .problem-grid { display: grid; gap: var(--space-md); grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
   .problem-grid article { background: var(--bg-elevated); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: var(--space-lg); }
@@ -296,18 +339,28 @@ const meta = metaEntry?.data;
   .timeline-item { display: grid; grid-template-columns: 200px 1fr; gap: var(--space-xl); position: relative; }
   .timeline-item::before { content: ''; position: absolute; left: 194px; top: 0.35rem; width: 14px; height: 14px; border-radius: 50%; background: var(--bg-elevated); border: 2px solid var(--border-medium); }
   .timeline-item.current::before { background: var(--accent-glow); border-color: var(--accent); box-shadow: 0 0 0 6px var(--accent-glow); }
-  .timeline-meta { color: var(--text-muted); font-size: var(--text-small); }
+  .timeline-meta { color: var(--text-muted); font-size: 0.95rem; }
   .timeline-meta p { margin: 0 0 var(--space-xs); }
-  .timeline-body p, .timeline-body li { color: var(--text-secondary); font-size: var(--text-small); }
-  .timeline-body ul { margin: var(--space-sm) 0 0; padding-left: 1rem; }
+  .timeline-body p, .timeline-body li { color: var(--text-secondary); font-size: 1.02rem; line-height: 1.65; }
+  .timeline-body ul { margin: var(--space-sm) 0 0; padding-left: 1.1rem; }
 
   .web-foundry-card { background: var(--bg-elevated); border: 1px solid var(--border-accent); border-radius: var(--radius-lg); padding: var(--space-xl); }
   .web-foundry-card p { color: var(--text-secondary); }
   .tag-row { display: flex; gap: var(--space-sm); flex-wrap: wrap; margin-top: var(--space-lg); }
   .tag-row span { border: 1px solid var(--border-medium); color: var(--text-secondary); border-radius: var(--radius-sm); padding: var(--space-xs) var(--space-md); font-size: var(--text-small); }
 
-  .logo-strip { display: flex; gap: var(--space-sm); flex-wrap: wrap; margin-top: var(--space-lg); }
-  .logo-strip span { border: 1px solid var(--border-medium); border-radius: var(--radius-sm); padding: var(--space-xs) var(--space-md); font-size: var(--text-small); color: var(--text-primary); font-weight: 500; letter-spacing: var(--tracking-wide); }
+  .company-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 1.25rem; }
+  .company-card { background: var(--bg-elevated); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 1rem 1.1rem; display: flex; flex-direction: column; gap: 0.35rem; }
+  .company-card strong { color: var(--text-primary); font-size: 0.95rem; }
+  .company-card span { color: var(--text-muted); font-size: 0.78rem; }
+
+  .testimonials { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2.5rem; }
+  .testimonial-card { background: var(--bg-elevated); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; gap: 1.25rem; }
+  .testimonial-card::before { content: '\201C'; font-size: 2.5rem; line-height: 1; color: var(--text-accent); opacity: 0.4; font-family: Georgia, serif; }
+  .testimonial-quote { font-size: 0.9375rem; line-height: 1.65; color: var(--text-secondary); font-style: italic; margin: 0; }
+  .testimonial-author { display: flex; flex-direction: column; gap: 0.2rem; padding-top: 0.75rem; border-top: 1px solid var(--border-subtle); }
+  .testimonial-author strong { font-family: var(--font-heading); font-size: 0.875rem; font-weight: 600; color: var(--text-primary); font-style: normal; }
+  .testimonial-author span { font-size: 0.75rem; color: var(--text-muted); font-style: normal; }
 
   .cta p { color: var(--text-secondary); }
   .cta-actions { display: flex; gap: var(--space-sm); flex-wrap: wrap; margin-top: var(--space-lg); }
@@ -317,9 +370,16 @@ const meta = metaEntry?.data;
   @media (max-width: 768px) {
     .split-hero { grid-template-columns: 1fr; }
     .panel-right { clip-path: none; margin-left: 0; padding-left: 3rem; }
-    .panel { min-height: 260px; padding: 2rem; }
+    .panel { min-height: 260px; padding: 2rem 1.5rem; }
+
+    .headline-content { flex-direction: column; align-items: center; text-align: center; gap: 2rem; }
+    .headline-photo img { width: 180px; height: 180px; }
+    .headline-text .proof-pills { justify-content: center; }
     .icon-grid { grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 1fr); }
     .icon-grid img:nth-child(n+7) { display: none; }
+
+    .company-grid { grid-template-columns: 1fr 1fr; }
+    .testimonials { grid-template-columns: 1fr; }
 
     .timeline::before { display: none; }
     .timeline-item { grid-template-columns: 1fr; gap: var(--space-sm); }
