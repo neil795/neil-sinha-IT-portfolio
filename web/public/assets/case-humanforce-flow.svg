@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="720" height="180" viewBox="0 0 720 180" fill="none">
   <rect width="720" height="180" rx="12" fill="#0F172A"/>
   <rect x="28" y="40" width="180" height="42" rx="8" fill="rgba(248,113,113,0.1)" stroke="rgba(248,113,113,0.3)"/>
-  <text x="40" y="66" fill="#F87171" font-family="Inter, Arial" font-size="14">Legacy CI + Long Tests</text>
+  <text x="40" y="66" fill="#F87171" font-family="Inter, Arial" font-size="14">TeamCity + Bitbucket + ClickOps</text>
   <rect x="262" y="40" width="180" height="42" rx="8" fill="rgba(59,130,246,0.15)" stroke="rgba(96,165,250,0.3)"/>
-  <text x="278" y="66" fill="#60A5FA" font-family="Inter, Arial" font-size="14">GitHub Actions</text>
+  <text x="278" y="66" fill="#60A5FA" font-family="Inter, Arial" font-size="14">GitHub Actions + Terraform Cloud</text>
   <rect x="496" y="40" width="180" height="42" rx="8" fill="rgba(52,211,153,0.1)" stroke="rgba(52,211,153,0.3)"/>
   <text x="508" y="66" fill="#34D399" font-family="Inter, Arial" font-size="14">ECS/Fargate Test Grid</text>
   <path d="M216 61h36" stroke="rgba(148,163,184,0.2)" stroke-width="2" stroke-linecap="round"/>

@@ -1,7 +1,7 @@
 {
   "title": "Chat-ERP Governed Delivery",
   "slug": "chat-erp-governed-delivery",
-  "companyContext": "AI-enabled ERP product build",
+  "companyContext": "PERSONAL PROJECT · AI-ENABLED ERP",
   "problem": "Rapid AI-assisted development can increase release and governance risk without strict controls.",
   "intervention": "Implemented issue-first workflow, proof-bundle governance, idempotent command patterns, and staged CI quality gates.",
   "tradeoffs": "Added governance overhead per PR to reduce downstream operational risk.",
@@ -21,7 +21,13 @@
       "confidence": "directional"
     }
   ],
-  "tech": ["TypeScript", "PostgreSQL", "GitHub Actions", "OpenClaw", "Playwright"],
+  "tech": [
+    "TypeScript",
+    "PostgreSQL",
+    "GitHub Actions",
+    "OpenClaw",
+    "Playwright"
+  ],
   "featured": true,
   "order": 30
 }

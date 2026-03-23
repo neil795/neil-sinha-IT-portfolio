@@ -2,11 +2,12 @@
   "company": "mPrest via Web Foundry Pty Ltd",
   "title": "Platform Engineer (Contract)",
   "period": "Nov 2025 - Present",
-  "summary": "Deploying regulated energy platform modules on on-prem OpenShift with repeatable release pipelines.",
+  "summary": "Deploying regulated energy platform modules on on-prem OpenShift with ArgoCD-driven GitOps pipelines and OCI Helm chart distribution via JFrog Artifactory.",
   "highlights": [
-    "Designed recursive Helm chart packaging across 4 products.",
-    "Managed architecture and release decisions across multiple energy providers.",
-    "Handled multi-container + database workloads in constrained on-prem environments."
+    "Designed recursive Helm chart packaging pipelines across 4 products, with CI pushing charts to OCI registry in JFrog Artifactory.",
+    "Implemented ArgoCD-driven GitOps deployment pipelines on on-prem OpenShift for 3 energy providers.",
+    "Configured highly available in-cluster databases (PostgreSQL, Redis, MongoDB, ElasticSearch) with environment-toggle HA settings.",
+    "Packaged and released versioned updates across 4 products maintaining deployment consistency in regulated energy infrastructure."
   ],
   "order": 10
 }

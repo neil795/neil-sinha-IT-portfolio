@@ -3,7 +3,7 @@
   "slug": "anz-platform-acceleration",
   "companyContext": "Banking platform engineering",
   "problem": "Pipeline latency, manual validation, and avoidable production defects slowed delivery.",
-  "intervention": "Introduced context-aware build logic, shift-left API validation patterns, and Kafka test automation frameworks.",
+  "intervention": "Introduced context-aware build logic and shift-left API validation patterns. Designed Kafka test automation framework in Go. Introduced SLO-based reliability engineering using Nobl9 and OpenTelemetry metrics, driving adoption across squads. Built Report Portal testOps dashboards via Python APIs.",
   "tradeoffs": "Increased upfront platform engineering effort to standardize patterns across squads before rollout.",
   "impact": [
     {
@@ -28,7 +28,15 @@
       "confidence": "approx"
     }
   ],
-  "tech": ["Go", "Kafka", "GKE", "Cloud Run", "Dataflow", "Spanner", "Nobl9"],
+  "tech": [
+    "Go",
+    "Kafka",
+    "GKE",
+    "Cloud Run",
+    "Dataflow",
+    "Spanner",
+    "Nobl9"
+  ],
   "featured": true,
   "order": 10
 }

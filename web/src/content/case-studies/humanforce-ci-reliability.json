@@ -2,8 +2,8 @@
   "title": "Humanforce CI Reliability Program",
   "slug": "humanforce-ci-reliability",
   "companyContext": "SaaS workforce platform",
-  "problem": "CI instability and long test cycles were delaying releases and increasing recovery risk.",
-  "intervention": "Migrated CI/CD to GitHub Actions, redesigned test infrastructure on ECS/Fargate, and hardened disaster recovery IaC.",
+  "problem": "CI instability across TeamCity and Bitbucket Pipelines, long test cycles on legacy infrastructure, and manual clickOps Terraform workflows were delaying releases and increasing recovery risk.",
+  "intervention": "Migrated CI/CD from TeamCity and Bitbucket Pipelines to GitHub Actions as a unified delivery platform. Architected ECS/Fargate infrastructure for Jenkins auto-testing. Replaced clickOps Terraform workflows and jump host access patterns with Terraform Cloud. Refactored IaC and hardened disaster recovery.",
   "tradeoffs": "Required migration planning across multiple teams before consolidating pipeline standards.",
   "impact": [
     {
@@ -28,7 +28,14 @@
       "confidence": "exact"
     }
   ],
-  "tech": ["GitHub Actions", "ECS", "Fargate", "Terraform", "PagerDuty", "Dynatrace"],
+  "tech": [
+    "GitHub Actions",
+    "ECS",
+    "Fargate",
+    "Terraform",
+    "PagerDuty",
+    "Dynatrace"
+  ],
   "featured": true,
   "order": 20
 }
