@@ -37,7 +37,31 @@ Every change to this site was planned, prompted, reviewed, and shipped using:
 
 ## OpenClaw Governance Framework
 
-[Then include the existing content about governance principles, core principles, getting started, etc.]
+This repo follows a lightweight, evidence-first governance model so AI-assisted changes stay safe, reviewable, and reproducible.
+
+### Governance principles
+- **Issue-first delivery:** every meaningful change starts from a tracked issue.
+- **Playbook-routed execution:** implementation follows domain playbooks before code changes.
+- **Proof-bundle completion:** each PR includes validation evidence, risk notes, and rollback intent.
+- **Merge discipline:** no direct merges; required checks and review gates must pass first.
+
+### Core principles
+- **Traceability:** issue ↔ PR ↔ commit ↔ validation artifacts are always linked.
+- **Small, auditable changes:** prefer narrow PRs over broad refactors.
+- **Safety by default:** call out security/data impact even for docs and infra updates.
+- **Operational readiness:** release and monitoring posture are part of done, not afterthoughts.
+
+### Getting started
+1. Open or select a scoped issue with clear acceptance criteria.
+2. Confirm area label and route through the relevant playbook in `docs/playbooks/`.
+3. Implement in a focused branch with evidence-backed PR description sections.
+4. Run required validation locally/CI and post proof artifacts on the linked issue.
+5. Merge only after checks are green and governance gates are satisfied.
+
+For the complete framework, see:
+- `frameworks/proof-bundle.md`
+- `docs/playbooks/00-task-intake-routing.md`
+- `docs/ci/governance-quickstart.md`
 
 ## License
 
