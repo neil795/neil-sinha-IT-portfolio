@@ -2,27 +2,24 @@
 
 🔗 **Live site:** [neil.webfoundryprivatelimited.com](https://neil.webfoundryprivatelimited.com)
 
-A premium, scroll-driven engineering portfolio built with Astro, deployed on Cloudflare Pages — and governed by the same engineering discipline I apply to production systems.
+A scroll-driven engineering portfolio built with Astro, deployed on Cloudflare Pages, and maintained with governed AI-assisted delivery.
 
 <img width="1612" height="889" alt="image" src="https://github.com/user-attachments/assets/e4b0c30d-becf-48bc-bf98-87a1ce171559" />
 
+## What this repo shows
 
-## What makes this repo different
+This is both a portfolio site and a working example of OpenClaw governance in practice.
 
-This isn't just a portfolio website. It's a demonstration of **governed AI-assisted development** using OpenClaw — an agentic AI engineering operating system.
-
-Every change to this site was planned, prompted, reviewed, and shipped using:
 - Issue-first workflow with proof-bundle delivery
 - Playbook-routed execution by domain
-- CI quality gates and merge discipline
-- Human review at every decision point
+- CI quality gates with merge discipline
+- Human review on meaningful decisions
 
 ## Tech stack
 
 - **Framework:** Astro 5 (static output)
 - **Hosting:** Cloudflare Pages
 - **Design:** Dark-mode SPA with scroll-driven narrative
-- **Governance:** OpenClaw playbooks + proof-bundle discipline
 
 ## Repository layout
 
