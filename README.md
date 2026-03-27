@@ -4,7 +4,8 @@
 
 A premium, scroll-driven engineering portfolio built with Astro, deployed on Cloudflare Pages — and governed by the same engineering discipline I apply to production systems.
 
-[INSERT SCREENSHOT HERE]
+<img width="1612" height="889" alt="image" src="https://github.com/user-attachments/assets/e4b0c30d-becf-48bc-bf98-87a1ce171559" />
+
 
 ## What makes this repo different
 
